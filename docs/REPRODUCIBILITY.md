@@ -75,6 +75,6 @@ behavior. Use `--deterministic` only as a stricter repeatability option.
   in `tests/`.
 - Exact paper-result regression checks use private reference JSON. The six
   checkpoints and the 1,024-pair SIDD+ evaluation archive are available from
-  the `v3.1-review.4` Release under their separate terms.
+  the `v3.1-review` Release under their separate terms.
 - The archived evaluation summary is checked against the private assets before
-  the `v3.1-review.4` release is replaced or extended.
+  the `v3.1-review` release is replaced or extended.

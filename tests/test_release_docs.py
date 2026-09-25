@@ -7,7 +7,7 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_review_release_docs_reference_v3_1_review_4() -> None:
+def test_review_release_docs_reference_canonical_review_tag() -> None:
     documents = [
         REPOSITORY_ROOT / "README.md",
         REPOSITORY_ROOT / "docs" / "CODE_AVAILABILITY.md",
@@ -18,7 +18,7 @@ def test_review_release_docs_reference_v3_1_review_4() -> None:
     ]
 
     for document in documents:
-        assert "v3.1-review.4" in document.read_text(encoding="utf-8")
+        assert "v3.1-review" in document.read_text(encoding="utf-8")
 
 
 def test_readme_quick_start_lists_all_release_manifests() -> None:
