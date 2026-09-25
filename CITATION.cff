@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated paper and this repository version."
+title: "Residual FDPL: Reference Implementation"
+abstract: "Reference implementation of Residual Frequency-Domain Perceptual Loss for real-world image denoising."
+authors:
+  - family-names: "Chen"
+    given-names: "Yixuan"
+    email: "cyx20051025@gmail.com"
+  - family-names: "Qin"
+    given-names: "Yufeng"
+version: "0.1.0"
+date-released: "2026-09-25"
+license: "Apache-2.0"
+keywords:
+  - "image denoising"
+  - "frequency-domain loss"
+  - "Residual FDPL"
+  - "SIDD"
+  - "PyTorch"

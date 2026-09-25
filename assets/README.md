@@ -1,11 +1,13 @@
 # Assets
 
-This directory is reserved for the public download manifest after the asset
-repository has an approved URL.
+This directory is reserved for the public download manifest. The checkpoint
+download links will point to the `v3.1-review` GitHub Release after the public
+repository owner is assigned.
 
-No dataset, checkpoint, HDF5 cache, or generated figure is bundled in this
-repository. Model and result redistribution will be decided after the upstream
-license review.
+No dataset, checkpoint, HDF5 cache, or generated figure is bundled in the
+public source repository. The six final checkpoints are approved for the review
+Release. Dataset, quick-evaluation data, and per-image result redistribution
+remain pending upstream and dataset-terms confirmation.
 
 The prepared private asset bundle contains:
 

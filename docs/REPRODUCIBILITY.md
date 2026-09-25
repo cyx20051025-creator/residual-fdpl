@@ -60,4 +60,4 @@ behavior. Use `--deterministic` only as a stricter repeatability option.
 - Exact paper-result regression checks use private reference JSON and
   checkpoints rather than redistributing them in the public repository.
 - The archived evaluation summary is checked against the private assets before
-  a release is approved.
+  the `v3.1-review` release is published.

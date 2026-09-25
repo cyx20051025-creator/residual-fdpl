@@ -2,20 +2,22 @@
 
 ## Core Assets
 
-The following assets are staged in a separate private repository. They can be
-attached to a GitHub Release after redistribution permission is confirmed:
+The following assets are staged in the companion full repository. The six
+final checkpoints are approved for the public `v3.1-review` GitHub Release.
+Large data and per-image result files remain separate:
 
 | Asset | Status | Planned storage |
 |---|---|---|
-| 3-RCAB seed 42 final weights | staged private | Release asset |
-| 3-RCAB seed 43 final weights | staged private | Release asset |
-| 3-RCAB seed 44 final weights | staged private | Release asset |
-| Matched no-RFDPL final weights | staged private | Release asset |
-| 1,024-pair SIDD validation bundle | staged private | Release asset |
-| Selected paired-result JSON files | staged private | Private repo or Release asset |
+| 3-RCAB seed 42 final weights | approved | `v3.1-review` Release asset |
+| 3-RCAB seed 43 final weights | approved | `v3.1-review` Release asset |
+| 3-RCAB seed 44 final weights | approved | `v3.1-review` Release asset |
+| Matched no-RFDPL final weights | approved | `v3.1-review` Release asset |
+| 1,024-pair SIDD validation bundle | pending dataset terms | Later Release asset |
+| Selected paired-result JSON files | private review reference | Full repository or later Release asset |
 | Full training histories and logs | pending | Release asset or external archive |
 
-No checkpoint is committed to the repository.
+No checkpoint is committed to ordinary Git history. Each Release asset is
+listed in `SHA256SUMS` in the companion full repository.
 
 ## Naming
 

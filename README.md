@@ -13,9 +13,10 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 - Stage 1 and Stage 2 SIDD fine-tuning with Residual FDPL
 - target FDPL share `alpha = 0.30`
 
-The repository is being prepared as a clean public release from a larger local
-research workspace. The canonical training and evaluation paths are now present
-in a small, testable codebase without changing the locked experiment protocol.
+This repository is the source-only release candidate for the paper revision.
+The canonical training and evaluation paths are present in a small, testable
+codebase without changing the locked experiment protocol. The exact revision
+prepared for review is tagged `v3.1-review`.
 
 ## Status
 
@@ -29,8 +30,9 @@ in a small, testable codebase without changing the locked experiment protocol.
 - Canonical Stage 1 -> Stage 2 SIDD trainer: available
 - EMA, fixed weight maps, calibration, checkpoints, and history JSON: available
 - CPU-only regression tests: available
-- Dataset, weight, and result redistribution terms: pending confirmation
-- Code license: pending author decision
+- Code license: Apache-2.0
+- Core checkpoints: prepared for the public review release
+- Dataset and per-image result redistribution: pending confirmation
 
 ## Installation
 
@@ -49,9 +51,10 @@ the validated local baseline used the MPS backend.
 
 ## Reviewer Quick Start
 
-The fastest path is to start from an approved checkpoint and the paired SIDD
-validation bundle. The public download links will be inserted when the asset
-release is approved.
+The fastest path is to start from an approved checkpoint and SIDD validation
+data. The six final checkpoints are prepared as `v3.1-review` release assets;
+the 1,024-pair quick-evaluation bundle remains private until dataset
+redistribution is confirmed.
 
 ```bash
 pip install -r requirements.txt
@@ -224,14 +227,29 @@ checklist and the locked protocol constants.
 
 ## Citation
 
-The final paper title, author metadata, and DOI will be added after publication.
-No citation entry is invented in advance.
+Repository metadata is provided in [CITATION.cff](CITATION.cff). The paper
+title, venue metadata, and DOI will be added after publication.
 
 ## License
 
-No code license has been selected yet. The repository must not be treated as
-open source until the author adds a license. Dataset and pretrained-weight
-licenses are separate from the code license.
+Original source code in this repository is licensed under the Apache License
+2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). Third-party dependencies and
+architectural references are listed in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Dataset and pretrained-weight
+terms remain separate from the code license.
+
+## Review Availability
+
+- [Code availability statement](docs/CODE_AVAILABILITY.md)
+- [Paper-to-code and result mapping](docs/PAPER_ARTIFACTS.md)
+- [Checkpoint SHA-256 manifest](docs/CHECKPOINT_SHA256SUMS)
+- [Third-party notices](THIRD_PARTY_NOTICES.md)
+- [Release plan](docs/RELEASE_PLAN.md)
+
+The review tag contains the canonical source code and locked configurations.
+Checkpoints, per-image results, and the quick-evaluation bundle are distributed
+separately so that large files and dataset terms do not enter normal Git
+history.
 
 ## Security and Assets
 
