@@ -17,13 +17,17 @@ The canonical v3.1 carrier and training values are:
 | VGG perceptual weight | `0.01` |
 | Map statistics | 15,000 SIDD noisy-clean pairs |
 | Reported checkpoints | final checkpoints |
-| Sliding inference | 128 x 128 tiles, stride 96 |
+| Sliding inference | 128 x 128 tiles, stride 96, boundary-clipped tails |
 | Direct inference | 256 x 256 |
 | Sliding seeds | 42, 43, 44 |
 | Direct seeds | 42, 43 |
 
 The Stage 1 and Stage 2 maps are precomputed and fixed during training.
 Periodic calibration updates the loss scale, not the spatial-frequency map.
+
+The sliding implementation follows the archived protocol: tile origins are
+`0, 96, 192, ...`; the final tile in each dimension is clipped to the image
+boundary and can be smaller than 128 pixels.
 
 ## Important Reporting Boundaries
 
@@ -47,8 +51,13 @@ The archived runs seeded Python, NumPy, PyTorch, and CUDA but did not enable
 cuDNN deterministic algorithms. The default public trainer matches that
 behavior. Use `--deterministic` only as a stricter repeatability option.
 
-## Remaining Migration Work
+## Migration Status
 
-- Add a data-free evaluator smoke fixture
-- Add exact result regression tests
-- Re-run the locked evaluation summary after refactoring
+- The clean source tree covers the canonical Stage 0, Stage 1/2, and
+  direct/sliding evaluation paths.
+- Data-free evaluator coverage and sliding-grid regression tests are included
+  in `tests/`.
+- Exact paper-result regression checks use private reference JSON and
+  checkpoints rather than redistributing them in the public repository.
+- The archived evaluation summary is checked against the private assets before
+  a release is approved.

@@ -70,8 +70,10 @@ reviewed.
 
 ## Asset Policy
 
-The Git repository stores source code, configurations, tests, documentation,
-and small JSON results. It does not store:
+The public source repository stores source code, configurations, tests, and
+documentation. Its `results/` directory is a placeholder only; paper result
+JSON files are not tracked in the public repository. The public repository
+does not store:
 
 - SIDD, Urban100, BSDS500, BSD68, or CBSD68 image files
 - derived HDF5 caches
@@ -95,4 +97,6 @@ belong in release assets or an external archive with SHA-256 manifests.
 - Configuration files are strict: unknown keys and protocol inconsistencies
   fail before training.
 - VGG19 weights can be supplied locally for offline runs.
+- Sliding inference uses 128 x 128 tiles with stride 96. Trailing tiles are
+  clipped at the image boundary and can be smaller than 128 pixels.
 - Reported metrics use matched same-seed comparisons.

@@ -10,7 +10,7 @@ license review.
 The prepared private asset bundle contains:
 
 ```text
-weights/
+checkpoints/
 |-- rcab3_seed42_fdpl_final.pth
 |-- rcab3_seed42_nofdpl_final.pth
 |-- rcab3_seed43_fdpl_final.pth
