@@ -1,0 +1,41 @@
+name: ci
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check src tests scripts train.py evaluate.py
+      - name: Shell Syntax
+        run: bash -n scripts/run_stage0.sh scripts/run_sidd.sh scripts/run_eval_all.sh
+      - name: Test
+        run: pytest
+      - name: Smoke
+        run: python scripts/smoke_test.py
+      - name: Build
+        run: python -m build
+      - name: Verify Built Wheel
+        run: |
+          python -m pip install --no-deps --force-reinstall dist/*.whl
+          cvfdpl-train --help
+          cvfdpl-smoke

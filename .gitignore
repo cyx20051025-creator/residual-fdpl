@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local data and model assets
+/data/
+/datasets/
+/models/
+/checkpoints/
+/weights/
+/outputs/
+/runs/
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.onnx
+*.ckpt
+
+# Logs and local reports
+*.log
+logs/
+cloud_logs*/
+*.pid
+
+# Secrets and private environment files
+.env
+.env.*
+*.pem
+*.key
+
+# Generated figures and paper material
+figures/generated/
+paper/
+manuscript/

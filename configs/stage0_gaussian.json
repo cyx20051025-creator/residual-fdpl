@@ -1,0 +1,34 @@
+{
+  "dataset": "Urban100",
+  "patch_size": 64,
+  "noise": {
+    "type": "gaussian",
+    "sigma": 0.1,
+    "normalized_range": [-1.0, 1.0]
+  },
+  "model": {
+    "name": "RRDBPlusLightRCAB",
+    "num_feat": 32,
+    "num_grow_ch": 16,
+    "num_rrdb": 4,
+    "num_rcab": 3
+  },
+  "loss": {
+    "name": "OriginalFDPL",
+    "low_weight": 0.2,
+    "high_weight": 0.8,
+    "radial_cutoff": 0.15,
+    "vgg_weight": 0.01,
+    "max_fdpl_weight": 0.05,
+    "warmup_epochs": 10
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "scheduler": "cosine",
+    "epochs": 50
+  },
+  "seed": 42
+}
+

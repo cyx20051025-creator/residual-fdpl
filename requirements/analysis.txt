@@ -1,0 +1,5 @@
+-r core.txt
+matplotlib>=3.8
+opencv-python>=4.9
+psutil>=5.9
+

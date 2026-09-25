@@ -1,0 +1,241 @@
+# Residual FDPL
+
+Reference implementation for **Residual Frequency-Domain Perceptual Loss
+(Residual FDPL)**, a frequency-domain training objective for real-world image
+denoising.
+
+The canonical carrier used in the paper is a compact 3-RCAB model:
+
+- 4 residual-in-residual dense blocks (RRDB)
+- 3 lightweight residual channel attention blocks (RCAB)
+- 197,819 parameters
+- Stage 0 Gaussian pretraining with Original FDPL
+- Stage 1 and Stage 2 SIDD fine-tuning with Residual FDPL
+- target FDPL share `alpha = 0.30`
+
+The repository is being prepared as a clean public release from a larger local
+research workspace. The canonical training and evaluation paths are now present
+in a small, testable codebase without changing the locked experiment protocol.
+
+## Status
+
+- Core model API: available
+- Residual FDPL and Original FDPL loss APIs: available
+- PSNR, SSIM, device, and reproducibility utilities: available
+- SIDD paired-image and HDF5 datasets: available
+- Synthetic CPU smoke test: available
+- HDF5 build and inference CLI: available
+- Canonical Stage 0 Gaussian trainer: available
+- Canonical Stage 1 -> Stage 2 SIDD trainer: available
+- EMA, fixed weight maps, calibration, checkpoints, and history JSON: available
+- CPU-only regression tests: available
+- Dataset, weight, and result redistribution terms: pending confirmation
+- Code license: pending author decision
+
+## Installation
+
+Python 3.10 or newer is required. Python 3.11 is the validated baseline.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+```
+
+Linux CUDA users should install the PyTorch build matching their CUDA driver
+before installing this package. macOS users can use the standard PyPI wheels;
+the validated local baseline used the MPS backend.
+
+## Reviewer Quick Start
+
+The fastest path is to start from an approved checkpoint and the paired SIDD
+validation bundle. The public download links will be inserted when the asset
+release is approved.
+
+```bash
+pip install -r requirements.txt
+
+CHECKPOINT=/path/to/rcab3_seed42_fdpl_final.pth \
+NOISY_DIR=/path/to/siddplus_valid_noisy_srgb \
+GT_DIR=/path/to/siddplus_valid_gt_srgb \
+OUTPUT_DIR=runs/reproduce_table3 \
+bash scripts/run_eval_all.sh
+```
+
+This writes `direct256.json` and `sliding.json`, including the aggregate and
+per-image PSNR/SSIM values. The same command works on a small quick-evaluation
+subset; place matching filenames in the noisy and GT directories.
+
+## Quick Smoke Test
+
+The smoke test does not download data or weights. It instantiates the 3-RCAB
+model, checks the parameter count, runs a forward and backward pass, and verifies
+that the loss is finite.
+
+```bash
+python scripts/smoke_test.py
+```
+
+## Data Preparation
+
+Only the data-preparation tooling is distributed here. Upstream datasets are
+not bundled.
+
+```bash
+python scripts/build_sidd_hdf5.py \
+  --noisy-dir /path/to/input_crops \
+  --gt-dir /path/to/gt_crops \
+  --output /path/to/sidd_crops_256_bilinear.h5 \
+  --crop-size 256 \
+  --interpolation bilinear
+```
+
+This 512 -> 256 bilinear cache is the main v3.1 training chain. The trainer
+then resizes patches to 64 or 256, matching the archived protocol.
+
+See [docs/DATA.md](docs/DATA.md) for the expected SIDD layout.
+
+## Evaluation
+
+```bash
+python evaluate.py \
+  --checkpoint /path/to/model.pth \
+  --noisy-dir /path/to/noisy \
+  --gt-dir /path/to/gt \
+  --protocol sliding
+```
+
+The evaluator accepts common Lightning-style checkpoint dictionaries with a
+`model_state_dict` key and plain PyTorch state dictionaries.
+
+## Training
+
+The public entry point is `train.py`. Paths are always supplied by the user;
+there are no machine-specific defaults.
+
+### Stage 0: Urban100 Gaussian Pretraining
+
+```bash
+python train.py stage0 \
+  --data-root /path/to/Urban100 \
+  --output-dir runs/stage0_seed42 \
+  --config configs/stage0_gaussian.json
+```
+
+This stage uses Original FDPL with the locked 50-epoch, 64 x 64 Gaussian
+protocol and writes `stage0.pth`, `stage0_history.json`, and
+`stage0_results.json`.
+
+### Stage 1 -> Stage 2: SIDD Fine-Tuning
+
+```bash
+python train.py sidd \
+  --h5 /path/to/sidd_crops_256_bilinear.h5 \
+  --pretrained runs/stage0_seed42/stage0.pth \
+  --output-dir runs/3rcab_seed42 \
+  --stage1-config configs/sidd_stage1_64.json \
+  --stage2-config configs/sidd_stage2_256.json
+```
+
+The two stages run in one process so the locked random state, EMA state, and
+calibrated loss scaling are preserved. The run writes final, best, and EMA
+checkpoints plus `loss_history.json` and `results.json`.
+
+Use `--no-fdpl` for the matched controlled baseline:
+
+```bash
+python train.py sidd \
+  --h5 /path/to/sidd_crops_256_bilinear.h5 \
+  --pretrained runs/stage0_seed42/stage0.pth \
+  --output-dir runs/3rcab_seed42_nofdpl \
+  --stage1-config configs/sidd_stage1_64.json \
+  --stage2-config configs/sidd_stage2_256.json \
+  --no-fdpl
+```
+
+`--smoke N` limits the data and is intended only for installation checks. It
+does not reproduce paper numbers.
+
+VGG19 ImageNet weights are downloaded by torchvision on first use. For an
+offline machine, pass a local torchvision VGG19 checkpoint to either training
+command:
+
+```bash
+python train.py sidd ... --vgg-weights /path/to/vgg19-dcbb9e9d.pth
+```
+
+The archived training runs seeded all libraries but did not enable cuDNN
+deterministic mode. The public trainer follows that default. Add
+`--deterministic` when bitwise-repeatability is preferred over matching the
+archived runtime behavior. Stage 0 checkpoints must match all model keys unless
+`--allow-partial-pretrained` is explicitly supplied.
+
+The optional `crop512` chain expects an original-resolution HDF5 cache and
+random-crops it during training:
+
+```bash
+python train.py sidd \
+  --h5 /path/to/sidd_crops_512.h5 \
+  --data-chain crop512 \
+  --pretrained runs/stage0_seed42/stage0.pth \
+  --output-dir runs/3rcab_seed42_crop512
+```
+
+That variant is a clean-chain option, not the archived main result protocol.
+
+## Repository Layout
+
+```text
+.
+|-- train.py                # Canonical Stage 0 and SIDD training entry point
+|-- evaluate.py             # Direct and sliding checkpoint evaluation
+|-- configs/                # Locked protocol values
+|-- docs/                   # Data, model, release, and reproducibility notes
+|-- requirements.txt        # Thin compatibility entry point for dependencies
+|-- scripts/                # One-click training/evaluation and data tools
+|-- src/cvfdpl/
+|   |-- data/               # SIDD and HDF5 datasets
+|   |-- losses/             # Original FDPL and Residual FDPL
+|   |-- metrics/            # PSNR and SSIM
+|   |-- models/             # 3-RCAB carrier
+|   |-- training/           # Trainers, EMA, weight maps, and configuration
+|   `-- utils/              # Device and reproducibility helpers
+|-- tests/                  # CPU-only unit and smoke tests
+`-- results/                # Public placeholder; paper JSON stays private
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for ownership boundaries and
+the public-file policy. Configuration JSON is validated strictly, so unknown
+or internally inconsistent fields fail before training starts.
+
+## Reproducibility
+
+The canonical values currently reflected in the package are:
+
+- direct, sliding, and Stage-0 protocols separated explicitly
+- final checkpoints used for reported results
+- seed 42, 43, and 44 sliding runs
+- seed 42 and 43 direct runs
+- sample-standard-deviation uncertainty for cross-seed summaries
+
+See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for the migration
+checklist and the locked protocol constants.
+
+## Citation
+
+The final paper title, author metadata, and DOI will be added after publication.
+No citation entry is invented in advance.
+
+## License
+
+No code license has been selected yet. The repository must not be treated as
+open source until the author adds a license. Dataset and pretrained-weight
+licenses are separate from the code license.
+
+## Security and Assets
+
+Do not commit credentials, private logs, datasets, checkpoints, HDF5 caches, or
+paper material. See [SECURITY.md](SECURITY.md) and
+[docs/MODEL_ZOO.md](docs/MODEL_ZOO.md). The prepared private asset manifest is
+documented in [assets/README.md](assets/README.md).

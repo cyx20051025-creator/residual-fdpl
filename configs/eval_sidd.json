@@ -1,0 +1,22 @@
+{
+  "dataset": "SIDD+ validation",
+  "num_images": 1024,
+  "image_size": 256,
+  "protocols": {
+    "direct": {
+      "tile_size": 256
+    },
+    "sliding": {
+      "tile_size": 128,
+      "stride": 96,
+      "overlap": 32,
+      "merge": "coverage_mean"
+    }
+  },
+  "metrics": ["psnr", "ssim"],
+  "ssim": {
+    "window_size": 11,
+    "sigma": 1.5
+  }
+}
+

@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "residual-fdpl"
+version = "0.1.0"
+description = "Reference implementation of Residual Frequency-Domain Perceptual Loss"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Yixuan Chen", email = "cyx20051025@gmail.com" },
+  { name = "Yufeng Qin" },
+]
+keywords = [
+  "image-denoising",
+  "frequency-domain-loss",
+  "real-world-image-denoising",
+  "SIDD",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "numpy>=1.26",
+  "Pillow>=10.0",
+  "h5py>=3.10",
+  "torch>=2.2",
+  "torchvision>=0.17",
+]
+
+[project.optional-dependencies]
+analysis = [
+  "matplotlib>=3.8",
+  "opencv-python>=4.9",
+  "psutil>=5.9",
+]
+train = [
+  "tqdm>=4.66",
+]
+dev = [
+  "build>=1.2",
+  "pytest>=8.0",
+  "ruff>=0.6",
+]
+
+[project.scripts]
+cvfdpl-smoke = "cvfdpl.cli:smoke"
+cvfdpl-train = "cvfdpl.training.cli:main"
+cvfdpl-evaluate = "cvfdpl.evaluation:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

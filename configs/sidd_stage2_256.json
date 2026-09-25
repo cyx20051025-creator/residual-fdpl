@@ -1,0 +1,31 @@
+{
+  "dataset": "SIDD",
+  "data_chain": "bilinear256",
+  "patch_size": 256,
+  "batch_size": 4,
+  "epochs": 10,
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 0.000005
+  },
+  "loss": {
+    "name": "ResidualFDPL",
+    "vgg_weight": 0.01,
+    "max_fdpl_weight": 0.058394160583941606,
+    "warmup_epochs": 3,
+    "target_ratio": 0.30,
+    "log_scaling": 1.37
+  },
+  "calibration": {
+    "batches": 32,
+    "every_epochs": 5
+  },
+  "weight_map": {
+    "pairs": 15000,
+    "batch_size": 8,
+    "form": "log_inv",
+    "clip_quantile": 0.01,
+    "power": false
+  },
+  "seed": 42
+}
