@@ -36,6 +36,9 @@ dependencies = [
   "torchvision>=0.17",
 ]
 
+[project.urls]
+Repository = "https://github.com/cyx20051025-creator/residual-fdpl"
+
 [project.optional-dependencies]
 analysis = [
   "matplotlib>=3.8",

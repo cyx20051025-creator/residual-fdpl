@@ -17,11 +17,7 @@ confirmed remain outside the ordinary Git history.
 
 ## Repository URL
 
-The final GitHub URL must be inserted after the repository owner is confirmed:
-
-```text
-https://github.com/<owner>/residual-fdpl
-```
+<https://github.com/cyx20051025-creator/residual-fdpl>
 
 The fixed revision for the second review is tag `v3.1-review`. After acceptance,
 the final release will use tag `v3.1.0` and a persistent archive DOI when
