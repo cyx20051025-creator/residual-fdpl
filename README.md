@@ -70,6 +70,25 @@ This writes `direct256.json` and `sliding.json`, including the aggregate and
 per-image PSNR/SSIM values. The same command works on a small quick-evaluation
 subset; place matching filenames in the noisy and GT directories.
 
+### Table 3 checkpoint map
+
+Each Table 3 row is reproduced by evaluating the two matched checkpoints for
+the stated seed under the stated protocol. A checkpoint trained for a seed is
+used for both protocols when that protocol is available.
+
+| Table 3 row | Protocol | Seed | Matched no-RFDPL asset | Residual FDPL asset | Reported gain |
+|---|---|---|---|---|---|
+| 1 | sliding `128/32` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` | `+0.6475` dB |
+| 2 | sliding `128/32` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` | `+0.5985` dB |
+| 3 | sliding `128/32` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` | `+0.4101` dB |
+| 4 | direct `256` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` | `+0.5995` dB |
+| 5 | direct `256` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` | `+0.6017` dB |
+
+The seed-44 direct model was not trained, so Table 3 has no direct row for
+seed 44. Table 3 gains are same-seed paired differences computed from the
+per-image values; evaluate both assets for a row rather than comparing
+absolute PSNR across seeds.
+
 ## Quick Smoke Test
 
 The smoke test does not download data or weights. It instantiates the 3-RCAB

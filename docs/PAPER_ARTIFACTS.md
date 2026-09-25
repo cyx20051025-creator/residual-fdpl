@@ -18,6 +18,23 @@ source tree.
 | Fig. 8, visual and error comparison | `src/cvfdpl/evaluation.py` | seed-42 paired results and crop-50 detail files |
 | Efficiency context | `src/cvfdpl/models/rrdb_rcab.py`, `scripts/run_eval_all.sh` | `latency_memory_final_2026.json` |
 
+## Table 3 Checkpoint Map
+
+The following release assets correspond to the five rows in Table 3. Both
+assets in a row use the same training seed and must be evaluated under the
+listed protocol; the reported quantity is their same-seed paired PSNR gain.
+
+| Table 3 row | Protocol | Seed | Matched no-RFDPL asset | Residual FDPL asset |
+|---|---|---|---|---|
+| 1 | sliding `128/32` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` |
+| 2 | sliding `128/32` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` |
+| 3 | sliding `128/32` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` |
+| 4 | direct `256` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` |
+| 5 | direct `256` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` |
+
+Seed 44 was trained and evaluated only under sliding inference. Absolute PSNR
+values are not compared across seeds.
+
 ## Protocol Notes
 
 - The main carrier is 4 x RRDB plus 3 x RCAB and has 197,819 parameters.
