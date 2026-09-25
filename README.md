@@ -15,7 +15,7 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 
 The canonical training and evaluation paths are present in a small, testable
 codebase without changing the locked experiment protocol. The exact revision
-prepared for review is tagged `v3.1-review.3`. Optional checkpoint and
+prepared for review is tagged `v3.1-review.4`. Optional checkpoint and
 evaluation-data assets are attached to the corresponding GitHub Release rather
 than committed to ordinary Git history.
 
@@ -32,7 +32,7 @@ than committed to ordinary Git history.
 - EMA, fixed weight maps, calibration, checkpoints, and history JSON: available
 - CPU-only regression tests: available
 - Code license: Apache-2.0
-- Core checkpoints: available in the public `v3.1-review.3` Release
+- Core checkpoints: available in the public `v3.1-review.4` Release
 - 1,024-pair SIDD+ validation bundle: available in the same Release under the
   upstream research/education notice
 - Per-image result redistribution: retained privately for this review
@@ -54,12 +54,14 @@ the validated local baseline used the MPS backend.
 
 ## Reviewer Quick Start
 
-The fastest path is to download the six checkpoints and
-`sidd_quick_eval_256.zip` from the `v3.1-review.3` Release:
+The fastest path is to download all ten assets from the `v3.1-review.4`
+Release: the six checkpoints, the three SHA-256 manifests, and
+`sidd_quick_eval_256.zip`.
 
 ```bash
 pip install -r requirements.txt
 
+shasum -a 256 -c CHECKPOINT_SHA256SUMS
 shasum -a 256 -c SIDD_QUICK_EVAL_ZIP_SHA256SUMS
 unzip sidd_quick_eval_256.zip -d /path/to/siddplus_valid
 
@@ -296,7 +298,7 @@ and citation are recorded in
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
 
-The review tag `v3.1-review.3` contains the canonical source code, locked
+The review tag `v3.1-review.4` contains the canonical source code, locked
 configurations, the Table 3 reproduction script, and the public checkpoint and
 evaluation-data manifests. Checkpoint binaries and the 1,024-pair evaluation
 archive are distributed in the Release; datasets are kept outside normal Git

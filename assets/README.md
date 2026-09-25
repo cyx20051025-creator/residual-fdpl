@@ -1,7 +1,7 @@
 # Assets
 
 This directory is reserved for the public download manifest. Checkpoint and
-SIDD+ evaluation downloads point to the `v3.1-review.3` GitHub Release.
+SIDD+ evaluation downloads point to the `v3.1-review.4` GitHub Release.
 
 No dataset, checkpoint, HDF5 cache, or generated figure is committed to the
 public source repository. The six final checkpoints and the 1,024-pair

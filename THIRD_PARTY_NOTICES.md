@@ -35,7 +35,7 @@ redistributed by this repository.
 ## SIDD and Evaluation Data
 
 The repository source tree and Git history do not distribute the complete
-SIDD, Urban100, or derived HDF5 caches. The `v3.1-review.3` Release optionally
+SIDD, Urban100, or derived HDF5 caches. The `v3.1-review.4` Release optionally
 provides the 1,024-pair SIDD+ validation subset used for paper evaluation.
 Its source and notice are recorded in `docs/SIDD_PLUS_LICENSE_AND_NOTICE.md`.
 The data are for open research and educational purposes, remain subject to the

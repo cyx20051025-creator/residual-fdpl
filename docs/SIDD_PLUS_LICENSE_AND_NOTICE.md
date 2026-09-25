@@ -1,7 +1,7 @@
 # SIDD+ Evaluation Data Notice
 
 This notice applies to the optional 1,024-pair SIDD+ evaluation archive
-distributed with the `v3.1-review.3` GitHub Release. It does not apply to the
+distributed with the `v3.1-review.4` GitHub Release. It does not apply to the
 project source code or the author-created checkpoints, which are licensed
 separately under Apache-2.0.
 

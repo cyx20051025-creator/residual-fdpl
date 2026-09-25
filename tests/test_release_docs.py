@@ -7,7 +7,7 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_review_release_docs_reference_v3_1_review_3() -> None:
+def test_review_release_docs_reference_v3_1_review_4() -> None:
     documents = [
         REPOSITORY_ROOT / "README.md",
         REPOSITORY_ROOT / "docs" / "CODE_AVAILABILITY.md",
@@ -18,7 +18,18 @@ def test_review_release_docs_reference_v3_1_review_3() -> None:
     ]
 
     for document in documents:
-        assert "v3.1-review.3" in document.read_text(encoding="utf-8")
+        assert "v3.1-review.4" in document.read_text(encoding="utf-8")
+
+
+def test_readme_quick_start_lists_all_release_manifests() -> None:
+    readme = (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8")
+    quick_start = readme.split("## Reviewer Quick Start", 1)[1].split(
+        "This evaluates each released checkpoint", 1
+    )[0]
+
+    assert "all ten assets" in quick_start
+    assert "shasum -a 256 -c CHECKPOINT_SHA256SUMS" in quick_start
+    assert "shasum -a 256 -c SIDD_QUICK_EVAL_ZIP_SHA256SUMS" in quick_start
 
 
 def test_sidd_plus_notice_contains_required_terms_and_sources() -> None:

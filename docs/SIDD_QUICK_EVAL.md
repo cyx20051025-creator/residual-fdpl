@@ -2,9 +2,10 @@
 
 The tables and figures in the v3.1 paper use the 1,024 paired SIDD+
 validation images described here. The exact evaluation archive
-`sidd_quick_eval_256.zip` is attached to the `v3.1-review.3` GitHub Release
-under the upstream open-research/education notice. Git history stores only the
-public manifest, not the images.
+`sidd_quick_eval_256.zip`, `SIDD_QUICK_EVAL_SHA256SUMS`, and
+`SIDD_QUICK_EVAL_ZIP_SHA256SUMS` are attached to the `v3.1-review.4` GitHub
+Release under the upstream open-research/education notice. Git history stores
+only the public manifests, not the images.
 
 ## Expected Layout
 
@@ -27,7 +28,8 @@ relative file name.
 
 ## Verification
 
-Download and extract the Release asset:
+Download the archive and its two checksum manifests, then verify and extract
+the archive:
 
 ```bash
 shasum -a 256 -c SIDD_QUICK_EVAL_ZIP_SHA256SUMS
