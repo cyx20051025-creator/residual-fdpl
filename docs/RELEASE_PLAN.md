@@ -13,8 +13,9 @@ Required before tagging:
 3. Confirm attribution and licenses for RRDB, RCAB, VGG19, and any optional
    external baselines.
 4. Add final `CITATION.cff` metadata after the paper identifiers are known.
-5. Decide whether the author email should remain in `pyproject.toml`.
-6. Run one clean checkout, package build, test, and smoke verification.
+5. Run one clean checkout, package build, test, and smoke verification.
+
+The author email is intentionally public in `pyproject.toml`.
 
 The repository intentionally has no automatic GitHub Release publishing
 workflow yet. Publishing before the decisions above would make irreversible

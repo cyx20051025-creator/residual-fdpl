@@ -10,7 +10,7 @@ The following decisions remain with the authors:
 6. Confirm the supported environment matrix.
 7. Confirm the final paper title, authors, DOI, and BibTeX metadata.
 8. Confirm attribution and license handling for NAFNet, RIDNet, and SwinIR.
-9. Confirm whether the author email should remain in `pyproject.toml`.
+9. Resolved: the author email remains public in `pyproject.toml`.
 10. Resolved for the first release: the public repository is source-only.
     Paper result JSON files stay in the private asset repository.
 
