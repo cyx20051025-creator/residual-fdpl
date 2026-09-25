@@ -4,7 +4,7 @@
 
 The source code, locked training configuration, and evaluation entry points
 for the canonical 3-RCAB pipeline are available in the public repository tagged
-`v3.1-review`. The release contains the model, Original FDPL and Residual FDPL
+`v3.1-review.1`. The release contains the model, Original FDPL and Residual FDPL
 implementations, calibration logic, SIDD data-preparation tools, direct and
 sliding evaluators, and CPU-only tests.
 
@@ -19,7 +19,7 @@ confirmed remain outside the ordinary Git history.
 
 <https://github.com/cyx20051025-creator/residual-fdpl>
 
-The fixed revision for the second review is tag `v3.1-review`. After acceptance,
+The fixed revision for the second review is tag `v3.1-review.1`. After acceptance,
 the final release will use tag `v3.1.0` and a persistent archive DOI when
 available.
 
@@ -32,5 +32,9 @@ available.
 | Locked Stage 0 and SIDD protocol | `configs/`, `src/cvfdpl/training/config.py` |
 | Direct and sliding inference | `src/cvfdpl/evaluation.py`, `tests/test_evaluation.py` |
 | Dataset preparation | `scripts/build_sidd_hdf5.py`, `docs/DATA.md` |
-| Full evaluation summary | release checkpoints plus `scripts/run_eval_all.sh` |
+| Full Table 3 paired summary | release checkpoints plus `scripts/reproduce_table3.sh` |
 | Exact paper table values | private release JSON mapped in `docs/PAPER_ARTIFACTS.md` |
+
+The public `docs/SIDD_QUICK_EVAL_SHA256SUMS` manifest identifies the 1,024
+validation pairs used for the reported comparison without redistributing the
+upstream images.

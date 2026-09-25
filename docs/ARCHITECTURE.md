@@ -22,10 +22,13 @@ Residual-FDPL/
 |   |-- MODEL_ZOO.md
 |   |-- OPEN_SOURCE_DECISIONS.md
 |   |-- RELEASE_PLAN.md
+|   |-- SIDD_QUICK_EVAL.md
 |   `-- REPRODUCIBILITY.md
 |-- scripts/
 |   |-- build_sidd_hdf5.py
 |   |-- evaluate.py
+|   |-- reproduce_table3.py
+|   |-- reproduce_table3.sh
 |   `-- smoke_test.py
 |-- src/cvfdpl/
 |   |-- data/
@@ -49,6 +52,7 @@ Residual-FDPL/
 | `metrics/` | PSNR and Gaussian-window SSIM |
 | `train.py` | User-facing canonical training entry point |
 | `scripts/evaluate.py` | Paired-image direct or sliding evaluation |
+| `scripts/reproduce_table3.sh` | Released-checkpoint Table 3 paired reproduction |
 | `results/` | Public placeholder; paper JSON stays in the private asset repo |
 
 ## Migration Map

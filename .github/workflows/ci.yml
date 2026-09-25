@@ -27,11 +27,17 @@ jobs:
       - name: Lint
         run: ruff check src tests scripts train.py evaluate.py
       - name: Shell Syntax
-        run: bash -n scripts/run_stage0.sh scripts/run_sidd.sh scripts/run_eval_all.sh
+        run: |
+          bash -n scripts/run_stage0.sh
+          bash -n scripts/run_sidd.sh
+          bash -n scripts/run_eval_all.sh
+          bash -n scripts/reproduce_table3.sh
       - name: Test
         run: pytest
       - name: Smoke
         run: python scripts/smoke_test.py
+      - name: Table 3 CLI
+        run: python scripts/reproduce_table3.py --help
       - name: Build
         run: python -m build
       - name: Verify Built Wheel

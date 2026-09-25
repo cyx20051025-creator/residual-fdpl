@@ -7,7 +7,7 @@ source tree.
 
 | Paper artifact | Public code or configuration | Private reference result |
 |---|---|---|
-| Table 3, main 3-RCAB comparison | `train.py`, `configs/sidd_stage1_64.json`, `configs/sidd_stage2_256.json`, `scripts/run_eval_all.sh` | `paired_rcab_redo_sliding.json`, `paired_rcab_redo_direct256.json`, `paired_s44_sliding.json` |
+| Table 3, main 3-RCAB comparison | `train.py`, `configs/sidd_stage1_64.json`, `configs/sidd_stage2_256.json`, `scripts/reproduce_table3.sh` | `paired_rcab_redo_sliding.json`, `paired_rcab_redo_direct256.json`, `paired_s44_sliding.json` |
 | Table 4, component ablations | `src/cvfdpl/losses/fdpl.py`, `configs/sidd_stage1_64.json`, `configs/sidd_stage2_256.json` | `paired_ablation_abc_sliding.json`, `paired_ablation_df_sliding.json`, `paired_ablation_final_sliding.json`, `table4_detail_final_2026.json` |
 | Table 5, sensitivity analysis | `src/cvfdpl/training/weight_map.py`, `src/cvfdpl/losses/fdpl.py` | `paired_ablation_final_sliding.json`, `paired_new_20260909.json` |
 | Table 6, RCAB capacity curve | `src/cvfdpl/models/rrdb_rcab.py`, `train.py` | `paired_rcab_redo_sliding.json`, `paired_rcab_redo_direct256.json` |
@@ -34,6 +34,17 @@ listed protocol; the reported quantity is their same-seed paired PSNR gain.
 
 Seed 44 was trained and evaluated only under sliding inference. Absolute PSNR
 values are not compared across seeds.
+
+The released checkpoints and a verified SIDD+ validation copy can be evaluated
+with one command:
+
+```bash
+CHECKPOINT_DIR=/path/to/checkpoints \
+NOISY_DIR=/path/to/siddplus_valid_noisy_srgb \
+GT_DIR=/path/to/siddplus_valid_gt_srgb \
+OUTPUT_DIR=runs/reproduce_table3 \
+bash scripts/reproduce_table3.sh
+```
 
 ## Protocol Notes
 

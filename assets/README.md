@@ -1,13 +1,12 @@
 # Assets
 
-This directory is reserved for the public download manifest. The checkpoint
-download links will point to the `v3.1-review` GitHub Release after the public
-repository owner is assigned.
+This directory is reserved for the public download manifest. Checkpoint
+download links point to the `v3.1-review.1` GitHub Release.
 
 No dataset, checkpoint, HDF5 cache, or generated figure is bundled in the
-public source repository. The six final checkpoints are approved for the review
-Release. Dataset, quick-evaluation data, and per-image result redistribution
-remain pending upstream and dataset-terms confirmation.
+public source repository. The six final checkpoints are distributed in the
+review Release. Dataset images, quick-evaluation archives, and per-image
+results remain outside normal Git history pending upstream terms.
 
 The prepared private asset bundle contains:
 
@@ -29,6 +28,6 @@ release_bundles/
 ```
 
 The quick-evaluation bundle contains 1,024 paired SIDD validation images and
-expands to approximately 185 MB. It is kept outside the normal public Git
-history. The private asset repository also contains a verified `SHA256SUMS`
-manifest for every staged file.
+expands to approximately 185 MB. A public
+`docs/SIDD_QUICK_EVAL_SHA256SUMS` manifest records the exact expected files
+without redistributing the images.

@@ -13,10 +13,10 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 - Stage 1 and Stage 2 SIDD fine-tuning with Residual FDPL
 - target FDPL share `alpha = 0.30`
 
-This repository is the source-only release candidate for the paper revision.
-The canonical training and evaluation paths are present in a small, testable
+This repository is the source-only release for the paper revision. The
+canonical training and evaluation paths are present in a small, testable
 codebase without changing the locked experiment protocol. The exact revision
-prepared for review is tagged `v3.1-review`.
+prepared for review is tagged `v3.1-review.1`.
 
 ## Status
 
@@ -31,7 +31,7 @@ prepared for review is tagged `v3.1-review`.
 - EMA, fixed weight maps, calibration, checkpoints, and history JSON: available
 - CPU-only regression tests: available
 - Code license: Apache-2.0
-- Core checkpoints: prepared for the public review release
+- Core checkpoints: available in the public `v3.1-review.1` Release
 - Dataset and per-image result redistribution: pending confirmation
 
 ## Installation
@@ -51,24 +51,36 @@ the validated local baseline used the MPS backend.
 
 ## Reviewer Quick Start
 
-The fastest path is to start from an approved checkpoint and SIDD validation
-data. The six final checkpoints are prepared as `v3.1-review` release assets;
-the 1,024-pair quick-evaluation bundle remains private until dataset
-redistribution is confirmed.
+The fastest path is to download the six checkpoints from the
+`v3.1-review.1` Release and point the script at a verified SIDD+ validation
+copy. The public repository provides the SHA-256 manifest for the 1,024 pairs
+but does not redistribute the image files.
 
 ```bash
 pip install -r requirements.txt
 
-CHECKPOINT=/path/to/rcab3_seed42_fdpl_final.pth \
+CHECKPOINT_DIR=/path/to/downloaded/checkpoints \
 NOISY_DIR=/path/to/siddplus_valid_noisy_srgb \
 GT_DIR=/path/to/siddplus_valid_gt_srgb \
 OUTPUT_DIR=runs/reproduce_table3 \
-bash scripts/run_eval_all.sh
+bash scripts/reproduce_table3.sh
 ```
 
-This writes `direct256.json` and `sliding.json`, including the aggregate and
-per-image PSNR/SSIM values. The same command works on a small quick-evaluation
-subset; place matching filenames in the noisy and GT directories.
+This evaluates each released checkpoint under the protocol required by its
+Table 3 row and writes raw per-image JSON, `table3_reproduced.json`, and
+`table3_reproduced.csv`. The reported quantity is the same-seed paired PSNR
+gain; the script also reports the paired SSIM delta and PSNR normal
+approximation. Add `--limit 1` for a fast CLI check on the first pair.
+
+For a single checkpoint and both inference protocols, use:
+
+```bash
+CHECKPOINT=/path/to/model.pth \
+NOISY_DIR=/path/to/siddplus_valid_noisy_srgb \
+GT_DIR=/path/to/siddplus_valid_gt_srgb \
+OUTPUT_DIR=runs/single_checkpoint \
+bash scripts/run_eval_all.sh
+```
 
 ### Table 3 checkpoint map
 
@@ -116,7 +128,9 @@ python scripts/build_sidd_hdf5.py \
 This 512 -> 256 bilinear cache is the main v3.1 training chain. The trainer
 then resizes patches to 64 or 256, matching the archived protocol.
 
-See [docs/DATA.md](docs/DATA.md) for the expected SIDD layout.
+See [docs/DATA.md](docs/DATA.md) for the expected SIDD layout and
+[docs/SIDD_QUICK_EVAL.md](docs/SIDD_QUICK_EVAL.md) for the 1,024-pair
+manifest and verification command.
 
 ## Evaluation
 
@@ -262,12 +276,14 @@ terms remain separate from the code license.
 - [Code availability statement](docs/CODE_AVAILABILITY.md)
 - [Paper-to-code and result mapping](docs/PAPER_ARTIFACTS.md)
 - [Checkpoint SHA-256 manifest](docs/CHECKPOINT_SHA256SUMS)
+- [SIDD quick-evaluation manifest](docs/SIDD_QUICK_EVAL.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
 
-The review tag contains the canonical source code and locked configurations.
-Checkpoints, per-image results, and the quick-evaluation bundle are distributed
-separately so that large files and dataset terms do not enter normal Git
+The review tag `v3.1-review.1` contains the canonical source code, locked
+configurations, the Table 3 reproduction script, and the public checkpoint and
+evaluation-data manifests. Checkpoint binaries are distributed in the Release;
+the evaluation images and per-image result files remain outside normal Git
 history.
 
 ## Security and Assets

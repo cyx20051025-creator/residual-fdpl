@@ -7,6 +7,10 @@ derived HDF5 caches, or any other upstream dataset.
 
 The public code expects locally prepared pairs with matching filenames.
 
+For the exact 1,024-pair evaluation set used in the paper, see
+[SIDD_QUICK_EVAL.md](SIDD_QUICK_EVAL.md) and verify the local copy with
+`SIDD_QUICK_EVAL_SHA256SUMS`.
+
 ## SIDD Directory Layout
 
 The expected SIDD training layout is:
