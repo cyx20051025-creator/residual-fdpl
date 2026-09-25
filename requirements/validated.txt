@@ -1,0 +1,10 @@
+# Clean-room validation environment recorded on 2026-09-25.
+# Python 3.11.9; macOS CPU/MPS.
+build==1.6.1
+h5py==3.16.0
+numpy==2.4.6
+Pillow==12.3.0
+pytest==9.1.1
+ruff==0.16.9
+torch==2.14.0
+torchvision==0.29.0

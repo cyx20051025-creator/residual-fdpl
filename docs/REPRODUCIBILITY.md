@@ -17,7 +17,7 @@ The canonical v3.1 carrier and training values are:
 | VGG perceptual weight | `0.01` |
 | Map statistics | 15,000 SIDD noisy-clean pairs |
 | Reported checkpoints | final checkpoints |
-| Sliding inference | 128 x 128 tiles, stride 96, boundary-clipped tails |
+| Sliding inference | 128-pixel tiles, 32-pixel overlap, stride 96, boundary-clipped tails |
 | Direct inference | 256 x 256 |
 | Sliding seeds | 42, 43, 44 |
 | Direct seeds | 42, 43 |
@@ -43,9 +43,25 @@ boundary and can be smaller than 128 pixels.
 
 ## Environment
 
-The local validation baseline was Python 3.11 with PyTorch using Apple MPS.
-Linux CUDA support is part of the public target matrix but still requires a
-clean-room verification.
+The clean-room validation baseline was Python 3.11.9 on macOS. The exact
+package versions from the independent source-only audit are recorded in
+`requirements/validated.txt`:
+
+| Component | Validated version |
+|---|---|
+| Python | 3.11.9 |
+| PyTorch | 2.14.0 |
+| torchvision | 0.29.0 |
+| NumPy | 2.4.6 |
+| Pillow | 12.3.0 |
+| h5py | 3.16.0 |
+| pytest | 9.1.1 |
+| Ruff | 0.16.9 |
+| build | 1.6.1 |
+
+The minimum supported ranges remain in `pyproject.toml`. The earlier local
+training baseline used PyTorch 2.12.1 and Apple MPS. Linux CUDA support is part
+of the public target matrix but still requires a clean-room verification.
 
 The archived runs seeded Python, NumPy, PyTorch, and CUDA but did not enable
 cuDNN deterministic algorithms. The default public trainer matches that
@@ -60,4 +76,4 @@ behavior. Use `--deterministic` only as a stricter repeatability option.
 - Exact paper-result regression checks use private reference JSON and
   checkpoints rather than redistributing them in the public repository.
 - The archived evaluation summary is checked against the private assets before
-  the `v3.1-review.1` release is replaced or extended.
+  the `v3.1-review.2` release is replaced or extended.

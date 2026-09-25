@@ -16,7 +16,7 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 This repository is the source-only release for the paper revision. The
 canonical training and evaluation paths are present in a small, testable
 codebase without changing the locked experiment protocol. The exact revision
-prepared for review is tagged `v3.1-review.1`.
+prepared for review is tagged `v3.1-review.2`.
 
 ## Status
 
@@ -31,7 +31,7 @@ prepared for review is tagged `v3.1-review.1`.
 - EMA, fixed weight maps, calibration, checkpoints, and history JSON: available
 - CPU-only regression tests: available
 - Code license: Apache-2.0
-- Core checkpoints: available in the public `v3.1-review.1` Release
+- Core checkpoints: available in the public `v3.1-review.2` Release
 - Dataset and per-image result redistribution: pending confirmation
 
 ## Installation
@@ -52,7 +52,7 @@ the validated local baseline used the MPS backend.
 ## Reviewer Quick Start
 
 The fastest path is to download the six checkpoints from the
-`v3.1-review.1` Release and point the script at a verified SIDD+ validation
+`v3.1-review.2` Release and point the script at a verified SIDD+ validation
 copy. The public repository provides the SHA-256 manifest for the 1,024 pairs
 but does not redistribute the image files.
 
@@ -90,9 +90,9 @@ used for both protocols when that protocol is available.
 
 | Table 3 row | Protocol | Seed | Matched no-RFDPL asset | Residual FDPL asset | Reported gain |
 |---|---|---|---|---|---|
-| 1 | sliding `128/32` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` | `+0.6475` dB |
-| 2 | sliding `128/32` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` | `+0.5985` dB |
-| 3 | sliding `128/32` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` | `+0.4101` dB |
+| 1 | sliding `128-tile / 32-overlap / stride-96` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` | `+0.6475` dB |
+| 2 | sliding `128-tile / 32-overlap / stride-96` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` | `+0.5985` dB |
+| 3 | sliding `128-tile / 32-overlap / stride-96` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` | `+0.4101` dB |
 | 4 | direct `256` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` | `+0.5995` dB |
 | 5 | direct `256` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` | `+0.6017` dB |
 
@@ -265,11 +265,13 @@ title, venue metadata, and DOI will be added after publication.
 
 ## License
 
-Original source code in this repository is licensed under the Apache License
-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). Third-party dependencies and
-architectural references are listed in
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Dataset and pretrained-weight
-terms remain separate from the code license.
+Original source code and the six author-created 3-RCAB checkpoint files
+distributed in this repository's review Release are licensed under the Apache
+License 2.0, to the extent permitted by applicable law. See [LICENSE](LICENSE)
+and [NOTICE](NOTICE). Third-party dependencies, external pretrained weights,
+datasets, and architectural references are listed separately in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and remain under their own
+terms.
 
 ## Review Availability
 
@@ -280,7 +282,7 @@ terms remain separate from the code license.
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
 
-The review tag `v3.1-review.1` contains the canonical source code, locked
+The review tag `v3.1-review.2` contains the canonical source code, locked
 configurations, the Table 3 reproduction script, and the public checkpoint and
 evaluation-data manifests. Checkpoint binaries are distributed in the Release;
 the evaluation images and per-image result files remain outside normal Git

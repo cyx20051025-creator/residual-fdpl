@@ -4,7 +4,7 @@
 
 The source code, locked training configuration, and evaluation entry points
 for the canonical 3-RCAB pipeline are available in the public repository tagged
-`v3.1-review.1`. The release contains the model, Original FDPL and Residual FDPL
+`v3.1-review.2`. The release contains the model, Original FDPL and Residual FDPL
 implementations, calibration logic, SIDD data-preparation tools, direct and
 sliding evaluators, and CPU-only tests.
 
@@ -19,7 +19,7 @@ confirmed remain outside the ordinary Git history.
 
 <https://github.com/cyx20051025-creator/residual-fdpl>
 
-The fixed revision for the second review is tag `v3.1-review.1`. After acceptance,
+The fixed revision for the second review is tag `v3.1-review.2`. After acceptance,
 the final release will use tag `v3.1.0` and a persistent archive DOI when
 available.
 

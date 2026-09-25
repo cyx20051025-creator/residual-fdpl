@@ -1,8 +1,10 @@
 # Third-Party Notices
 
-The Apache-2.0 license in this repository applies to original project code.
-Dependencies, datasets, pretrained weights, and architectural references remain
-subject to their own terms.
+The Apache-2.0 license in this repository applies to original project code and
+the six author-created 3-RCAB checkpoint files distributed in the review
+Release, to the extent permitted by applicable law. Dependencies, datasets,
+external pretrained weights, and architectural references remain subject to
+their own terms.
 
 ## Runtime Dependencies
 
@@ -15,7 +17,8 @@ subject to their own terms.
 | h5py | HDF5 data access | BSD-3-Clause |
 
 The exact dependency versions used for validation are recorded in
-`docs/REPRODUCIBILITY.md` and the package metadata in `pyproject.toml`.
+`requirements/validated.txt`; `docs/REPRODUCIBILITY.md` summarizes the
+environment.
 
 ## Architectural References
 

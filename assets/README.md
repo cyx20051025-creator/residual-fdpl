@@ -1,7 +1,7 @@
 # Assets
 
 This directory is reserved for the public download manifest. Checkpoint
-download links point to the `v3.1-review.1` GitHub Release.
+download links point to the `v3.1-review.2` GitHub Release.
 
 No dataset, checkpoint, HDF5 cache, or generated figure is bundled in the
 public source repository. The six final checkpoints are distributed in the
