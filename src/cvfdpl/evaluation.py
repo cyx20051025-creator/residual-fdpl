@@ -49,22 +49,22 @@ def sliding_inference(
     """Merge overlapping tile predictions with a coverage mean."""
 
     _, _, height, width = noisy.shape
+    if tile_size <= 0 or stride <= 0:
+        raise ValueError("tile_size and stride must be positive")
+    if stride > tile_size:
+        raise ValueError("stride cannot exceed tile_size")
     if tile_size > height or tile_size > width:
         return direct_inference(model, noisy)
     output = torch.zeros_like(noisy)
     counts = torch.zeros(1, 1, height, width, device=noisy.device, dtype=noisy.dtype)
-    top_positions = list(range(0, height - tile_size + 1, stride))
-    left_positions = list(range(0, width - tile_size + 1, stride))
-    if top_positions[-1] != height - tile_size:
-        top_positions.append(height - tile_size)
-    if left_positions[-1] != width - tile_size:
-        left_positions.append(width - tile_size)
-    for top in top_positions:
-        for left in left_positions:
-            tile = noisy[:, :, top : top + tile_size, left : left + tile_size]
+    for top in range(0, height, stride):
+        bottom = min(top + tile_size, height)
+        for left in range(0, width, stride):
+            right = min(left + tile_size, width)
+            tile = noisy[:, :, top:bottom, left:right]
             prediction = model(tile)
-            output[:, :, top : top + tile_size, left : left + tile_size] += prediction
-            counts[:, :, top : top + tile_size, left : left + tile_size] += 1
+            output[:, :, top:bottom, left:right] += prediction
+            counts[:, :, top:bottom, left:right] += 1
     return output / counts
 
 

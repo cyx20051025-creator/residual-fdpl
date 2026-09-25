@@ -14,6 +14,33 @@ def test_sliding_inference_with_identity_model() -> None:
     assert torch.allclose(output, image)
 
 
+def test_sliding_inference_uses_trailing_partial_tiles() -> None:
+    class RecordingModel(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.shapes: list[tuple[int, int]] = []
+
+        def forward(self, image: torch.Tensor) -> torch.Tensor:
+            self.shapes.append(tuple(image.shape[-2:]))
+            return image
+
+    model = RecordingModel()
+    output = sliding_inference(model, torch.rand(1, 3, 8, 8), tile_size=4, stride=3)
+
+    assert output.shape == (1, 3, 8, 8)
+    assert model.shapes == [
+        (4, 4),
+        (4, 4),
+        (4, 2),
+        (4, 4),
+        (4, 4),
+        (4, 2),
+        (2, 4),
+        (2, 4),
+        (2, 2),
+    ]
+
+
 def test_evaluation_returns_per_image_json(tmp_path: Path) -> None:
     noisy_dir = tmp_path / "noisy"
     gt_dir = tmp_path / "gt"
