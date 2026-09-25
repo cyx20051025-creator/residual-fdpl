@@ -13,10 +13,11 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 - Stage 1 and Stage 2 SIDD fine-tuning with Residual FDPL
 - target FDPL share `alpha = 0.30`
 
-This repository is the source-only release for the paper revision. The
-canonical training and evaluation paths are present in a small, testable
+The canonical training and evaluation paths are present in a small, testable
 codebase without changing the locked experiment protocol. The exact revision
-prepared for review is tagged `v3.1-review.2`.
+prepared for review is tagged `v3.1-review.3`. Optional checkpoint and
+evaluation-data assets are attached to the corresponding GitHub Release rather
+than committed to ordinary Git history.
 
 ## Status
 
@@ -31,8 +32,10 @@ prepared for review is tagged `v3.1-review.2`.
 - EMA, fixed weight maps, calibration, checkpoints, and history JSON: available
 - CPU-only regression tests: available
 - Code license: Apache-2.0
-- Core checkpoints: available in the public `v3.1-review.2` Release
-- Dataset and per-image result redistribution: pending confirmation
+- Core checkpoints: available in the public `v3.1-review.3` Release
+- 1,024-pair SIDD+ validation bundle: available in the same Release under the
+  upstream research/education notice
+- Per-image result redistribution: retained privately for this review
 
 ## Installation
 
@@ -51,17 +54,18 @@ the validated local baseline used the MPS backend.
 
 ## Reviewer Quick Start
 
-The fastest path is to download the six checkpoints from the
-`v3.1-review.2` Release and point the script at a verified SIDD+ validation
-copy. The public repository provides the SHA-256 manifest for the 1,024 pairs
-but does not redistribute the image files.
+The fastest path is to download the six checkpoints and
+`sidd_quick_eval_256.zip` from the `v3.1-review.3` Release:
 
 ```bash
 pip install -r requirements.txt
 
+shasum -a 256 -c SIDD_QUICK_EVAL_ZIP_SHA256SUMS
+unzip sidd_quick_eval_256.zip -d /path/to/siddplus_valid
+
 CHECKPOINT_DIR=/path/to/downloaded/checkpoints \
-NOISY_DIR=/path/to/siddplus_valid_noisy_srgb \
-GT_DIR=/path/to/siddplus_valid_gt_srgb \
+NOISY_DIR=/path/to/siddplus_valid/siddplus_valid_noisy_srgb \
+GT_DIR=/path/to/siddplus_valid/siddplus_valid_gt_srgb \
 OUTPUT_DIR=runs/reproduce_table3 \
 bash scripts/reproduce_table3.sh
 ```
@@ -71,6 +75,9 @@ Table 3 row and writes raw per-image JSON, `table3_reproduced.json`, and
 `table3_reproduced.csv`. The reported quantity is the same-seed paired PSNR
 gain; the script also reports the paired SSIM delta and PSNR normal
 approximation. Add `--limit 1` for a fast CLI check on the first pair.
+The archive carries
+[the SIDD+ data notice](docs/SIDD_PLUS_LICENSE_AND_NOTICE.md); it is for open
+research and educational use and is not relicensed under Apache-2.0.
 
 For a single checkpoint and both inference protocols, use:
 
@@ -113,8 +120,9 @@ python scripts/smoke_test.py
 
 ## Data Preparation
 
-Only the data-preparation tooling is distributed here. Upstream datasets are
-not bundled.
+The complete SIDD training dataset is not bundled. The Release provides the
+exact 1,024-pair validation subset used for evaluation, while the
+data-preparation tooling below supports user-supplied training data.
 
 ```bash
 python scripts/build_sidd_hdf5.py \
@@ -273,19 +281,25 @@ datasets, and architectural references are listed separately in
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and remain under their own
 terms.
 
+The optional `sidd_quick_eval_256.zip` archive is third-party research data.
+It is not Apache-2.0. Its source, upstream notice, redistribution conditions,
+and citation are recorded in
+[docs/SIDD_PLUS_LICENSE_AND_NOTICE.md](docs/SIDD_PLUS_LICENSE_AND_NOTICE.md).
+
 ## Review Availability
 
 - [Code availability statement](docs/CODE_AVAILABILITY.md)
 - [Paper-to-code and result mapping](docs/PAPER_ARTIFACTS.md)
 - [Checkpoint SHA-256 manifest](docs/CHECKPOINT_SHA256SUMS)
 - [SIDD quick-evaluation manifest](docs/SIDD_QUICK_EVAL.md)
+- [SIDD+ data license and notice](docs/SIDD_PLUS_LICENSE_AND_NOTICE.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
 
-The review tag `v3.1-review.2` contains the canonical source code, locked
+The review tag `v3.1-review.3` contains the canonical source code, locked
 configurations, the Table 3 reproduction script, and the public checkpoint and
-evaluation-data manifests. Checkpoint binaries are distributed in the Release;
-the evaluation images and per-image result files remain outside normal Git
+evaluation-data manifests. Checkpoint binaries and the 1,024-pair evaluation
+archive are distributed in the Release; datasets are kept outside normal Git
 history.
 
 ## Security and Assets

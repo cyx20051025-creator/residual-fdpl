@@ -34,10 +34,12 @@ redistributed by this repository.
 
 ## SIDD and Evaluation Data
 
-The repository does not redistribute SIDD, Urban100, or derived HDF5 caches.
-Users are responsible for obtaining the upstream datasets and following their
-terms. The public evaluator accepts user-supplied noisy/ground-truth image
-pairs with matching filenames.
+The repository source tree and Git history do not distribute the complete
+SIDD, Urban100, or derived HDF5 caches. The `v3.1-review.3` Release optionally
+provides the 1,024-pair SIDD+ validation subset used for paper evaluation.
+Its source and notice are recorded in `docs/SIDD_PLUS_LICENSE_AND_NOTICE.md`.
+The data are for open research and educational purposes, remain subject to the
+upstream challenge terms, and are not relicensed under Apache-2.0.
 
 ## External Baselines
 

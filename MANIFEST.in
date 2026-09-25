@@ -9,7 +9,9 @@ include requirements.txt
 recursive-include configs *.json
 include docs/CHECKPOINT_SHA256SUMS
 include docs/SIDD_QUICK_EVAL_SHA256SUMS
+include docs/SIDD_QUICK_EVAL_ZIP_SHA256SUMS
 recursive-include docs *.md
 recursive-include requirements *.txt
+recursive-include release_notices *.txt
 recursive-include scripts *.py *.sh
 recursive-include tests *.py

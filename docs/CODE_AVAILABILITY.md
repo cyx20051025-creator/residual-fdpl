@@ -4,22 +4,22 @@
 
 The source code, locked training configuration, and evaluation entry points
 for the canonical 3-RCAB pipeline are available in the public repository tagged
-`v3.1-review.2`. The release contains the model, Original FDPL and Residual FDPL
+`v3.1-review.3`. The release contains the model, Original FDPL and Residual FDPL
 implementations, calibration logic, SIDD data-preparation tools, direct and
 sliding evaluators, and CPU-only tests.
 
-The SIDD and Urban100 datasets are obtained from their official distribution
-channels and are not redistributed by this repository. The repository provides
-the expected directory layout and HDF5 preparation scripts. The six final
-checkpoints are distributed as release assets with SHA-256 verification. Full
-per-image result files and any dataset subset whose redistribution is not
-confirmed remain outside the ordinary Git history.
+The complete SIDD and Urban100 datasets are obtained from their official
+distribution channels and are not stored in Git. The review Release provides
+the exact 1,024-pair SIDD+ validation subset used in the paper under its
+upstream research/education notice. The six final checkpoints are distributed
+as Release assets with SHA-256 verification. Full per-image result files
+remain outside ordinary Git history.
 
 ## Repository URL
 
 <https://github.com/cyx20051025-creator/residual-fdpl>
 
-The fixed revision for the second review is tag `v3.1-review.2`. After acceptance,
+The fixed revision for the second review is tag `v3.1-review.3`. After acceptance,
 the final release will use tag `v3.1.0` and a persistent archive DOI when
 available.
 
@@ -35,6 +35,6 @@ available.
 | Full Table 3 paired summary | release checkpoints plus `scripts/reproduce_table3.sh` |
 | Exact paper table values | private release JSON mapped in `docs/PAPER_ARTIFACTS.md` |
 
-The public `docs/SIDD_QUICK_EVAL_SHA256SUMS` manifest identifies the 1,024
-validation pairs used for the reported comparison without redistributing the
-upstream images.
+The `v3.1-review.3` Release provides the 1,024 validation pairs used for the
+reported comparison, together with `docs/SIDD_QUICK_EVAL_SHA256SUMS` and
+`docs/SIDD_PLUS_LICENSE_AND_NOTICE.md`.

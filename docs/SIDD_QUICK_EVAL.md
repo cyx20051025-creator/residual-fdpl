@@ -1,10 +1,10 @@
 # SIDD Quick-Evaluation Manifest
 
 The tables and figures in the v3.1 paper use the 1,024 paired SIDD+
-validation images described here. This repository does not redistribute the
-image files or a derived archive. The public manifest contains only file names
-and SHA-256 digests so a locally obtained copy can be verified before running
-the released checkpoints.
+validation images described here. The exact evaluation archive
+`sidd_quick_eval_256.zip` is attached to the `v3.1-review.3` GitHub Release
+under the upstream open-research/education notice. Git history stores only the
+public manifest, not the images.
 
 ## Expected Layout
 
@@ -27,8 +27,15 @@ relative file name.
 
 ## Verification
 
-From the directory that contains `siddplus_valid_noisy_srgb/` and
-`siddplus_valid_gt_srgb/`, run:
+Download and extract the Release asset:
+
+```bash
+shasum -a 256 -c SIDD_QUICK_EVAL_ZIP_SHA256SUMS
+unzip sidd_quick_eval_256.zip -d /path/to/siddplus_valid
+cd /path/to/siddplus_valid
+```
+
+Then verify every extracted image:
 
 ```bash
 shasum -a 256 -c /path/to/residual-fdpl/docs/SIDD_QUICK_EVAL_SHA256SUMS
@@ -45,7 +52,9 @@ checkpoint directory and the verified image paths.
 
 ## Distribution Boundary
 
-The upstream SIDD data terms remain in force. Do not add these PNG files,
-derived HDF5 caches, or a repacked quick-evaluation archive to normal Git
-history. If the authors later confirm that redistribution is permitted, the
-same manifest can be attached to a GitHub Release as a separate archive.
+The upstream SIDD data terms remain in force and the stricter NTIRE SIDD+
+challenge terms apply to this evaluation subset. The data are provided only
+for open research and educational purposes. Redistribution must retain
+[the complete notice](SIDD_PLUS_LICENSE_AND_NOTICE.md); the images are not
+relicensed under Apache-2.0. Do not add these PNG files, derived HDF5 caches,
+or the evaluation archive to normal Git history.

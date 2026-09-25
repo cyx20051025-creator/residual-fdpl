@@ -84,8 +84,9 @@ does not store:
 - model checkpoints or pretrained baseline weights
 - logs, cloud credentials, local output directories, or paper material
 
-Data and weights require separate redistribution review. If approved, they
-belong in release assets or an external archive with SHA-256 manifests.
+Data and weights use separate terms. The six checkpoints and the SIDD+
+evaluation archive belong in Release assets or an external archive with
+SHA-256 manifests, not ordinary Git history.
 
 ## Protocol Invariants
 

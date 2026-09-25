@@ -73,7 +73,8 @@ behavior. Use `--deterministic` only as a stricter repeatability option.
   direct/sliding evaluation paths.
 - Data-free evaluator coverage and sliding-grid regression tests are included
   in `tests/`.
-- Exact paper-result regression checks use private reference JSON and
-  checkpoints rather than redistributing them in the public repository.
+- Exact paper-result regression checks use private reference JSON. The six
+  checkpoints and the 1,024-pair SIDD+ evaluation archive are available from
+  the `v3.1-review.3` Release under their separate terms.
 - The archived evaluation summary is checked against the private assets before
-  the `v3.1-review.2` release is replaced or extended.
+  the `v3.1-review.3` release is replaced or extended.

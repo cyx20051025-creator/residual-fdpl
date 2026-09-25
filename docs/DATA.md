@@ -2,14 +2,17 @@
 
 ## Distributed Scope
 
-This repository does not redistribute SIDD, Urban100, BSDS500, BSD68, CBSD68,
-derived HDF5 caches, or any other upstream dataset.
+The Git source tree does not redistribute SIDD, Urban100, BSDS500, BSD68,
+CBSD68, derived HDF5 caches, or any other upstream dataset.
 
-The public code expects locally prepared pairs with matching filenames.
+The `v3.1-review.3` Release provides only the exact 1,024-pair SIDD+
+validation subset used for paper evaluation. Training data and other datasets
+must be obtained separately by the user.
 
-For the exact 1,024-pair evaluation set used in the paper, see
-[SIDD_QUICK_EVAL.md](SIDD_QUICK_EVAL.md) and verify the local copy with
-`SIDD_QUICK_EVAL_SHA256SUMS`.
+For the exact evaluation archive and its data notice, see
+[SIDD_QUICK_EVAL.md](SIDD_QUICK_EVAL.md) and
+[SIDD_PLUS_LICENSE_AND_NOTICE.md](SIDD_PLUS_LICENSE_AND_NOTICE.md). Verify the
+local copy with `SIDD_QUICK_EVAL_SHA256SUMS`.
 
 ## SIDD Directory Layout
 
@@ -65,5 +68,6 @@ The generated HDF5 contains two datasets:
 
 ## License Status
 
-The upstream dataset licenses and redistribution terms are not inferred here.
-Confirm them before publishing derived caches or hosting data.
+The upstream dataset terms remain in force. The provided evaluation archive
+must retain its complete notice and may be used only for open research and
+educational purposes. Derived training caches are not redistributed.

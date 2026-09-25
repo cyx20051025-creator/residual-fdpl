@@ -2,16 +2,16 @@
 
 ## Core Assets
 
-The six final checkpoints are available in the public `v3.1-review.2` GitHub
+The six final checkpoints are available in the public `v3.1-review.3` GitHub
 Release. Large data and per-image result files remain separate:
 
 | Asset | Status | Planned storage |
 |---|---|---|
-| 3-RCAB seed 42 final weights | available | `v3.1-review.2` Release asset |
-| 3-RCAB seed 43 final weights | available | `v3.1-review.2` Release asset |
-| 3-RCAB seed 44 final weights | available | `v3.1-review.2` Release asset |
-| Matched no-RFDPL final weights | available | `v3.1-review.2` Release asset |
-| 1,024-pair SIDD validation bundle | file list and SHA-256 public; images pending dataset terms | Later Release asset |
+| 3-RCAB seed 42 final weights | available | `v3.1-review.3` Release asset |
+| 3-RCAB seed 43 final weights | available | `v3.1-review.3` Release asset |
+| 3-RCAB seed 44 final weights | available | `v3.1-review.3` Release asset |
+| Matched no-RFDPL final weights | available | `v3.1-review.3` Release asset |
+| 1,024-pair SIDD+ validation bundle | available under upstream research/education notice | `v3.1-review.3` Release asset |
 | Selected paired-result JSON files | private review reference | Full repository or later Release asset |
 | Full training histories and logs | pending | Release asset or external archive |
 
