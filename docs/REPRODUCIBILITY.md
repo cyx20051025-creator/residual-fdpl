@@ -38,6 +38,9 @@ boundary and can be smaller than 128 pixels.
 - Frequency-band and texture analyses retain their stated subset and
   descriptive boundaries.
 - PSNR significance does not transfer automatically to SSIM.
+- PSNR p-values use two-sided paired Student-t tests and are conditional on
+  the evaluated final checkpoints; they do not estimate training-seed
+  uncertainty.
 - RIDNet and SwinIR-windowed are boundary evidence, not a cross-architecture
   ranking.
 

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "residual-fdpl"
 version = "0.1.0"
-description = "Reference implementation of Residual Frequency-Domain Perceptual Loss"
+description = "Reference implementation of Residual Frequency Domain Perception Loss"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]

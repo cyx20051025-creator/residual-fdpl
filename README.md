@@ -1,6 +1,6 @@
 # Residual FDPL
 
-Reference implementation for **Residual Frequency-Domain Perceptual Loss
+Reference implementation for **Residual Frequency Domain Perception Loss
 (Residual FDPL)**, a frequency-domain training objective for real-world image
 denoising.
 
@@ -75,8 +75,9 @@ bash scripts/reproduce_table3.sh
 This evaluates each released checkpoint under the protocol required by its
 Table 3 row and writes raw per-image JSON, `table3_reproduced.json`, and
 `table3_reproduced.csv`. The reported quantity is the same-seed paired PSNR
-gain; the script also reports the paired SSIM delta and PSNR normal
-approximation. Add `--limit 1` for a fast CLI check on the first pair.
+gain; the script also reports the paired SSIM delta and a two-sided Student-t
+PSNR p-value with `df = n - 1` (`df = 1023` for the full validation set). Add
+`--limit 1` for a fast CLI check on the first pair.
 The archive carries
 [the SIDD+ data notice](docs/SIDD_PLUS_LICENSE_AND_NOTICE.md); it is for open
 research and educational use and is not relicensed under Apache-2.0.
@@ -270,8 +271,9 @@ checklist and the locked protocol constants.
 
 ## Citation
 
-Repository metadata is provided in [CITATION.cff](CITATION.cff). The paper
-title, venue metadata, and DOI will be added after publication.
+Repository metadata is provided in [CITATION.cff](CITATION.cff). Paper title,
+venue metadata, and DOI are added only when those bibliographic details become
+available.
 
 ## License
 

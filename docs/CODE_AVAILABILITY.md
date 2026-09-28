@@ -19,9 +19,9 @@ remain outside ordinary Git history.
 
 <https://github.com/cyx20051025-creator/residual-fdpl>
 
-The fixed revision for the second review is tag `v3.1-review`. After acceptance,
-the final release will use tag `v3.1.0` and a persistent archive DOI when
-available.
+The fixed revision for the second review is tag `v3.1-review`. Bibliographic
+metadata and any subsequent archival tag or DOI are added only when those
+details become available.
 
 ## Reproduction Scope
 

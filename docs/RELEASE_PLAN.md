@@ -43,13 +43,13 @@ educational reproduction under the upstream notice in
 history and is not relicensed under Apache-2.0. Per-image result JSON files
 remain in the private review reference.
 
-## Post-Acceptance Release
+## Future Archive Release
 
-After acceptance:
+When bibliographic metadata and an archival identifier become available:
 
-1. Freeze the accepted source and paper artifact mapping.
+1. Freeze the review source and paper artifact mapping.
 2. Add the final paper DOI, journal metadata, and BibTeX information.
 3. Preserve the SIDD+ evaluation notice with any permanent release and decide
    whether the per-image JSON files should be added.
-4. Publish a permanent `v3.1.0` release and archive DOI.
+4. Create a permanent `v3.1.0` release and archive DOI when applicable.
 5. Preserve the review tag and its assets for auditability.

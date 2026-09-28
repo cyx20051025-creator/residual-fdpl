@@ -1,4 +1,4 @@
-"""Residual Frequency-Domain Perceptual Loss."""
+"""Residual Frequency Domain Perception Loss."""
 
 from cvfdpl.losses import (
     BrightnessAwareLoss,
@@ -24,4 +24,3 @@ __all__ = [
     "get_device",
     "set_seed",
 ]
-

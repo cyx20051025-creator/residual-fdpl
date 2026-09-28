@@ -74,7 +74,7 @@ def paired_statistics(
     no_fdpl_values: list[float],
     fdpl_values: list[float],
 ) -> dict[str, float | int | None]:
-    """Compute paired deltas and normal-approximation PSNR statistics."""
+    """Compute paired deltas and Student-t PSNR statistics."""
 
     if not no_fdpl_values or len(no_fdpl_values) != len(fdpl_values):
         raise ValueError("paired metric lists must be non-empty and have equal length")
@@ -95,7 +95,7 @@ def paired_statistics(
             p_two_sided = 0.0 if mean_delta != 0 else 1.0
         else:
             t_statistic = mean_delta / (std_delta / math.sqrt(len(deltas)))
-            p_two_sided = math.erfc(abs(t_statistic) / math.sqrt(2.0))
+            p_two_sided = _student_t_two_sided_p(t_statistic, len(deltas) - 1)
 
     return {
         "images": len(deltas),
@@ -112,6 +112,74 @@ def paired_statistics(
             )
         ),
     }
+
+
+def _betacf(a: float, b: float, x: float) -> float:
+    """Continued fraction for the regularized incomplete beta function."""
+    max_iterations = 300
+    epsilon = 3e-14
+    fp_min = 1e-300
+    qab = a + b
+    qap = a + 1.0
+    qam = a - 1.0
+    c = 1.0
+    d = 1.0 - qab * x / qap
+    if abs(d) < fp_min:
+        d = fp_min
+    d = 1.0 / d
+    h = d
+    for m in range(1, max_iterations + 1):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1.0 + aa * d
+        if abs(d) < fp_min:
+            d = fp_min
+        c = 1.0 + aa / c
+        if abs(c) < fp_min:
+            c = fp_min
+        d = 1.0 / d
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1.0 + aa * d
+        if abs(d) < fp_min:
+            d = fp_min
+        c = 1.0 + aa / c
+        if abs(c) < fp_min:
+            c = fp_min
+        d = 1.0 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1.0) < epsilon:
+            return h
+    raise RuntimeError("incomplete beta continued fraction did not converge")
+
+
+def _regularized_incomplete_beta(a: float, b: float, x: float) -> float:
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    log_beta = (
+        math.lgamma(a + b)
+        - math.lgamma(a)
+        - math.lgamma(b)
+        + a * math.log(x)
+        + b * math.log1p(-x)
+    )
+    beta_term = math.exp(log_beta)
+    if x < (a + 1.0) / (a + b + 2.0):
+        return beta_term * _betacf(a, b, x) / a
+    return 1.0 - beta_term * _betacf(b, a, 1.0 - x) / b
+
+
+def _student_t_two_sided_p(t: float, degrees_of_freedom: int) -> float:
+    """Two-sided Student-t tail probability."""
+    if math.isinf(t):
+        return 0.0
+    if t == 0.0:
+        return 1.0
+    x = degrees_of_freedom / (degrees_of_freedom + t * t)
+    return _regularized_incomplete_beta(degrees_of_freedom / 2.0, 0.5, x)
 
 
 def _validate_pair_alignment(

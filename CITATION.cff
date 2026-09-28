@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the associated paper and this repository version."
 title: "Residual FDPL: Reference Implementation"
-abstract: "Reference implementation of Residual Frequency-Domain Perceptual Loss for real-world image denoising."
+abstract: "Reference implementation of Residual Frequency Domain Perception Loss for real-world image denoising."
 authors:
   - family-names: "Chen"
     given-names: "Yixuan"

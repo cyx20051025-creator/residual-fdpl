@@ -18,4 +18,4 @@ The first public review release is now published. The current decisions are:
 8. Exact per-image paper result JSON files: retained in the private asset
    repository for the review release.
 9. Paper title, venue metadata, final DOI, and permanent archive DOI: added
-   after acceptance.
+   only when those bibliographic details become available.
