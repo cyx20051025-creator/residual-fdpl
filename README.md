@@ -36,6 +36,7 @@ than committed to ordinary Git history.
 - 1,024-pair SIDD+ validation bundle: available in the same Release under the
   upstream research/education notice
 - Per-image result redistribution: retained privately for this review
+- Clean-clone audit record: `docs/CLEAN_CLONE_AUDIT_20261001.md`
 
 ## Installation
 
