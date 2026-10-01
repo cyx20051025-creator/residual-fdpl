@@ -3,7 +3,8 @@
 The first public review release is now published. The current decisions are:
 
 1. Code license: Apache-2.0.
-2. Public review revision: `v3.1-review`.
+2. Corrected public source revision: `v3.1-review-3`.
+   The `v3.1-review` tag is retained as the asset Release.
 3. Public scope: canonical v3.1 source pipeline, configurations, CPU tests,
    Table 3 reproduction tooling, and public checksum manifests.
 4. Checkpoints: the six final 3-RCAB weights are distributed as Release assets

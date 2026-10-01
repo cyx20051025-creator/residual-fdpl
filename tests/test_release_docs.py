@@ -8,16 +8,21 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_review_release_docs_reference_canonical_review_tag() -> None:
-    documents = [
+    source_documents = [
         REPOSITORY_ROOT / "README.md",
         REPOSITORY_ROOT / "docs" / "CODE_AVAILABILITY.md",
-        REPOSITORY_ROOT / "docs" / "MODEL_ZOO.md",
         REPOSITORY_ROOT / "docs" / "OPEN_SOURCE_DECISIONS.md",
         REPOSITORY_ROOT / "docs" / "RELEASE_PLAN.md",
+    ]
+    release_documents = [
+        REPOSITORY_ROOT / "docs" / "MODEL_ZOO.md",
         REPOSITORY_ROOT / "docs" / "REPRODUCIBILITY.md",
     ]
 
-    for document in documents:
+    for document in source_documents:
+        assert "v3.1-review-3" in document.read_text(encoding="utf-8")
+
+    for document in release_documents:
         assert "v3.1-review" in document.read_text(encoding="utf-8")
 
 

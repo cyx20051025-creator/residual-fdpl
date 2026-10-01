@@ -14,10 +14,10 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 - target FDPL share `alpha = 0.30`
 
 The canonical training and evaluation paths are present in a small, testable
-codebase without changing the locked experiment protocol. The exact revision
-prepared for review is tagged `v3.1-review`. Optional checkpoint and
-evaluation-data assets are attached to the corresponding GitHub Release rather
-than committed to ordinary Git history.
+codebase without changing the locked experiment protocol. The corrected source
+revision prepared for review is tagged `v3.1-review-3`. Checkpoint and
+evaluation-data assets remain attached to the `v3.1-review` GitHub Release
+rather than committed to ordinary Git history.
 
 ## Status
 
@@ -302,11 +302,11 @@ and citation are recorded in
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
 
-The review tag `v3.1-review` contains the canonical source code, locked
-configurations, the Table 3 reproduction script, and the public checkpoint and
-evaluation-data manifests. Checkpoint binaries and the 1,024-pair evaluation
-archive are distributed in the Release; datasets are kept outside normal Git
-history.
+The source review tag `v3.1-review-3` contains the canonical source code,
+locked configurations, the Table 3 reproduction script, and the public
+checkpoint and evaluation-data manifests. Checkpoint binaries and the
+1,024-pair evaluation archive remain attached to the `v3.1-review` Release;
+datasets are kept outside normal Git history.
 
 ## Security and Assets
 
