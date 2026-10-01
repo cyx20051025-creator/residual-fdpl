@@ -33,9 +33,11 @@ sidd_quick_eval_256.zip
 | 3 | sliding, 128-tile / 32-overlap / stride-96 | 44 | `+0.4101` dB |
 | 4 | direct, 256 x 256 | 42 | `+0.5995` dB |
 | 5 | direct, 256 x 256 | 43 | `+0.6017` dB |
+| 6 | direct, 256 x 256 | 44 | `+0.3955` dB |
 
 The two assets for each row and their reported gains are mapped explicitly in
-`README.md` and `docs/PAPER_ARTIFACTS.md`. Seed 44 has no direct row.
+`README.md` and `docs/PAPER_ARTIFACTS.md`. The seed-44 direct row reuses the
+same matched final checkpoints as the seed-44 sliding row.
 
 The optional SIDD+ evaluation archive is provided for open research and
 educational reproduction under the upstream notice in

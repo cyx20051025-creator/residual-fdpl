@@ -105,10 +105,11 @@ used for both protocols when that protocol is available.
 | 3 | sliding `128-tile / 32-overlap / stride-96` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` | `+0.4101` dB |
 | 4 | direct `256` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` | `+0.5995` dB |
 | 5 | direct `256` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` | `+0.6017` dB |
+| 6 | direct `256` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` | `+0.3955` dB |
 
-The seed-44 direct model was not trained, so Table 3 has no direct row for
-seed 44. Table 3 gains are same-seed paired differences computed from the
-per-image values; evaluate both assets for a row rather than comparing
+The seed-44 direct row uses the same matched final checkpoints as the seed-44
+sliding row. Table 3 gains are same-seed paired differences computed from
+the per-image values; evaluate both assets for a row rather than comparing
 absolute PSNR across seeds.
 
 ## Quick Smoke Test
@@ -263,7 +264,7 @@ The canonical values currently reflected in the package are:
 - direct, sliding, and Stage-0 protocols separated explicitly
 - final checkpoints used for reported results
 - seed 42, 43, and 44 sliding runs
-- seed 42 and 43 direct runs
+- seed 42, 43, and 44 direct runs
 - sample-standard-deviation uncertainty for cross-seed summaries
 
 See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for the migration

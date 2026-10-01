@@ -20,7 +20,7 @@ The canonical v3.1 carrier and training values are:
 | Sliding inference | 128-pixel tiles, 32-pixel overlap, stride 96, boundary-clipped tails |
 | Direct inference | 256 x 256 |
 | Sliding seeds | 42, 43, 44 |
-| Direct seeds | 42, 43 |
+| Direct seeds | 42, 43, 44 |
 
 The Stage 1 and Stage 2 maps are precomputed and fixed during training.
 Periodic calibration updates the loss scale, not the spatial-frequency map.
@@ -33,8 +33,8 @@ boundary and can be smaller than 128 pixels.
 
 - Results use matched same-seed no-RFDPL comparisons.
 - Cross-seed summaries use sample standard deviation.
-- Seed 44 direct results are not reported because that direct run was not
-  trained.
+- The seed-44 direct row uses the same matched final checkpoint pair as the
+  sliding row and is included in the six-comparison reproduction script.
 - Frequency-band and texture analyses retain their stated subset and
   descriptive boundaries.
 - PSNR significance does not transfer automatically to SSIM.

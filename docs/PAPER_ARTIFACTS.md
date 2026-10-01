@@ -7,7 +7,7 @@ source tree.
 
 | Paper artifact | Public code or configuration | Private reference result |
 |---|---|---|
-| Table 3, main 3-RCAB comparison | `train.py`, `configs/sidd_stage1_64.json`, `configs/sidd_stage2_256.json`, `scripts/reproduce_table3.sh` | `paired_rcab_redo_sliding.json`, `paired_rcab_redo_direct256.json`, `paired_s44_sliding.json` |
+| Table 3, main 3-RCAB comparison | `train.py`, `configs/sidd_stage1_64.json`, `configs/sidd_stage2_256.json`, `scripts/reproduce_table3.sh` | `paired_rcab_redo_sliding.json`, `paired_rcab_redo_direct256.json`, `paired_s44_sliding.json`, `paired_component_seed44_direct.json` |
 | Table 4, component ablations | `src/cvfdpl/losses/fdpl.py`, `configs/sidd_stage1_64.json`, `configs/sidd_stage2_256.json` | `paired_ablation_abc_sliding.json`, `paired_ablation_df_sliding.json`, `paired_ablation_final_sliding.json`, `table4_detail_final_2026.json` |
 | Table 5, sensitivity analysis | `src/cvfdpl/training/weight_map.py`, `src/cvfdpl/losses/fdpl.py` | `paired_ablation_final_sliding.json`, `paired_new_20260909.json` |
 | Table 6, RCAB capacity curve | `src/cvfdpl/models/rrdb_rcab.py`, `train.py` | `paired_rcab_redo_sliding.json`, `paired_rcab_redo_direct256.json` |
@@ -20,7 +20,7 @@ source tree.
 
 ## Table 3 Checkpoint Map
 
-The following release assets correspond to the five rows in Table 3. Both
+The following release assets correspond to the six rows in Table 3. Both
 assets in a row use the same training seed and must be evaluated under the
 listed protocol; the reported quantity is their same-seed paired PSNR gain.
 
@@ -31,9 +31,10 @@ listed protocol; the reported quantity is their same-seed paired PSNR gain.
 | 3 | sliding `128-tile / 32-overlap / stride-96` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` |
 | 4 | direct `256` | 42 | `rcab3_seed42_nofdpl_final.pth` | `rcab3_seed42_fdpl_final.pth` |
 | 5 | direct `256` | 43 | `rcab3_seed43_nofdpl_final.pth` | `rcab3_seed43_fdpl_final.pth` |
+| 6 | direct `256` | 44 | `rcab3_seed44_nofdpl_final.pth` | `rcab3_seed44_fdpl_final.pth` |
 
-Seed 44 was trained and evaluated only under sliding inference. Absolute PSNR
-values are not compared across seeds.
+The same seed-44 checkpoint pair is evaluated under both sliding and direct
+inference. Absolute PSNR values are not compared across seeds.
 
 The released checkpoints and a verified SIDD+ validation copy can be evaluated
 with one command:

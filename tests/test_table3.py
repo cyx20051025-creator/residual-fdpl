@@ -11,13 +11,14 @@ from cvfdpl.table3 import (
 )
 
 
-def test_table3_rows_cover_five_reported_comparisons() -> None:
+def test_table3_rows_cover_six_reported_comparisons() -> None:
     assert [(row.protocol, row.seed) for row in TABLE3_ROWS] == [
         ("sliding", 42),
         ("sliding", 43),
         ("sliding", 44),
         ("direct", 42),
         ("direct", 43),
+        ("direct", 44),
     ]
 
 

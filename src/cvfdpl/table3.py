@@ -67,6 +67,14 @@ TABLE3_ROWS: tuple[Table3Row, ...] = (
         "rcab3_seed43_fdpl_final.pth",
         0.6017,
     ),
+    Table3Row(
+        6,
+        "direct",
+        44,
+        "rcab3_seed44_nofdpl_final.pth",
+        "rcab3_seed44_fdpl_final.pth",
+        0.3955,
+    ),
 )
 
 
