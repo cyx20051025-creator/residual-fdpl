@@ -15,7 +15,7 @@ Release. Large data and per-image result files remain separate:
 | Selected paired-result JSON files | private review reference | Full repository or later Release asset |
 | Full training histories and logs | pending | Release asset or external archive |
 
-No checkpoint is committed to ordinary Git history. Each Release asset is
+No checkpoint is committed to ordinary Git history. Each checkpoint asset is
 listed in `CHECKPOINT_SHA256SUMS`, distributed with the Release.
 
 ## Naming

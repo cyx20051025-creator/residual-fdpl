@@ -60,6 +60,7 @@ def test_student_t_matches_reference_tail_probabilities(
     assert _student_t_two_sided_p(t_statistic, 1023) == pytest.approx(
         expected,
         rel=5e-12,
+        abs=0.0,
     )
 
 
