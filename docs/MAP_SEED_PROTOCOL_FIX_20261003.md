@@ -14,6 +14,10 @@ seed-42 statistics and shared across training seeds 42, 43, and 44.
   `WEIGHT_MAP_SEED = 42`.
 - Map construction isolates the PyTorch RNG state, so temporary map-sampling
   seeds cannot alter the subsequent training random stream.
+- Both production map calls pass their corresponding `StageConfig`, with a
+  regression test exercising the actual `run_sidd_training` entry point.
+- Map seeding changes only the CPU default generator, avoiding unintended
+  resets of MPS RNG state.
 - Regression tests verify both the fixed map seed and RNG-state preservation.
 
 The existing released checkpoints and evaluation assets are unchanged. This
@@ -25,7 +29,7 @@ manuscript number.
 
 ```text
 PYTHONPATH=src python3 -m pytest -q
-35 passed
+36 passed
 
 python3 -m ruff check src/cvfdpl/training/pipeline.py \
   src/cvfdpl/training/weight_map.py tests/test_training.py

@@ -20,7 +20,7 @@ def test_review_release_docs_reference_canonical_review_tag() -> None:
     ]
 
     for document in source_documents:
-        assert "v3.1-review-6" in document.read_text(encoding="utf-8")
+        assert "v3.1-review-7" in document.read_text(encoding="utf-8")
 
     for document in release_documents:
         assert "v3.1-review" in document.read_text(encoding="utf-8")

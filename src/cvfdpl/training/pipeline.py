@@ -278,6 +278,7 @@ def run_sidd_training(
         map_64 = _get_weight_map_for_stage(
             map_dataset_64,
             stage1.patch_size,
+            stage1,
             output_path,
             num_workers=num_workers,
             force=force_maps,
@@ -285,6 +286,7 @@ def run_sidd_training(
         map_256 = _get_weight_map_for_stage(
             map_dataset_256,
             stage2.patch_size,
+            stage2,
             output_path,
             num_workers=num_workers,
             force=force_maps,

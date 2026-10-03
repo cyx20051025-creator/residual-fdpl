@@ -7,7 +7,7 @@ The public repository is available at:
 <https://github.com/cyx20051025-creator/residual-fdpl>
 
 The corrected source revision for the second review is tagged
-`v3.1-review-6`. It contains the canonical v3.1 pipeline, strict
+`v3.1-review-7`. It contains the canonical v3.1 pipeline, strict
 configurations, CPU tests, the Table 3 reproduction script, and public SHA-256
 manifests for checkpoints and the 1,024-pair evaluation set.
 

@@ -10,6 +10,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from cvfdpl.data import HDF5PairDataset
 from cvfdpl.training import EMAModel, compute_weight_map, pipeline, train_stage
 from cvfdpl.training.config import StageConfig
+from cvfdpl.training.trainer import StageResult
 
 
 def test_weight_map_is_mean_normalized_and_shape_stable(tmp_path: Path) -> None:
@@ -41,7 +42,9 @@ def test_weight_map_is_mean_normalized_and_shape_stable(tmp_path: Path) -> None:
     assert weight_map.mean().item() == pytest.approx(1.0, abs=1e-6)
 
 
-def test_weight_map_preserves_the_training_rng_stream(tmp_path: Path) -> None:
+def test_weight_map_preserves_cpu_and_optional_mps_rng_streams(
+    tmp_path: Path,
+) -> None:
     path = tmp_path / "pairs.h5"
     generator = np.random.default_rng(11)
     noisy = generator.integers(0, 256, size=(4, 8, 8, 3), dtype=np.uint8)
@@ -55,8 +58,15 @@ def test_weight_map_preserves_the_training_rng_stream(tmp_path: Path) -> None:
         handle.create_dataset("gt", data=clean)
 
     torch.manual_seed(123)
-    expected = torch.rand(1).item()
+    expected_cpu = torch.rand(1).item()
+    expected_mps = None
+    if torch.backends.mps.is_available():
+        torch.mps.manual_seed(123)
+        expected_mps = torch.rand(1, device="mps").item()
+
     torch.manual_seed(123)
+    if torch.backends.mps.is_available():
+        torch.mps.manual_seed(123)
     compute_weight_map(
         HDF5PairDataset(path),
         num_pairs=4,
@@ -66,7 +76,9 @@ def test_weight_map_preserves_the_training_rng_stream(tmp_path: Path) -> None:
         clip_quantile=0.1,
         device="cpu",
     )
-    assert torch.rand(1).item() == pytest.approx(expected)
+    assert torch.rand(1).item() == pytest.approx(expected_cpu)
+    if expected_mps is not None:
+        assert torch.rand(1, device="mps").item() == pytest.approx(expected_mps)
 
 
 def test_shared_weight_map_seed_is_independent_of_training_seed(
@@ -104,6 +116,94 @@ def test_shared_weight_map_seed_is_independent_of_training_seed(
         )
 
     assert recorded_seeds == [42, 42, 42]
+
+
+def test_run_sidd_training_passes_stages_to_map_builder(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "pairs.h5"
+    generator = np.random.default_rng(13)
+    noisy = generator.integers(0, 256, size=(4, 8, 8, 3), dtype=np.uint8)
+    clean = np.clip(
+        noisy.astype(np.int16) + generator.integers(-5, 6, size=noisy.shape),
+        0,
+        255,
+    ).astype(np.uint8)
+    with h5py.File(path, "w") as handle:
+        handle.create_dataset("noisy", data=noisy)
+        handle.create_dataset("gt", data=clean)
+
+    map_calls: list[tuple[int, StageConfig]] = []
+
+    def fake_get_weight_map_for_stage(
+        dataset,
+        image_size,
+        stage,
+        output_dir,
+        **kwargs,
+    ):
+        map_calls.append((image_size, stage))
+        return torch.ones(3, image_size, image_size)
+
+    class DummyPerceptualLoss(nn.Module):
+        def __init__(self, *args, **kwargs) -> None:
+            super().__init__()
+
+    def fake_load_initial_model(*args, **kwargs):
+        return nn.Linear(1, 1)
+
+    def fake_train_stage(*args, **kwargs):
+        return StageResult(final_psnr=30.0, final_ssim=0.9, best_psnr=30.0)
+
+    def fake_validate_model(*args, **kwargs):
+        return 30.0, 0.9
+
+    monkeypatch.setattr(
+        pipeline,
+        "_get_weight_map_for_stage",
+        fake_get_weight_map_for_stage,
+    )
+    monkeypatch.setattr(pipeline, "_load_initial_model", fake_load_initial_model)
+    monkeypatch.setattr(pipeline, "VGGPerceptualLoss", DummyPerceptualLoss)
+    monkeypatch.setattr(pipeline, "count_parameters", lambda model: 197819)
+    monkeypatch.setattr(pipeline, "train_stage", fake_train_stage)
+    monkeypatch.setattr(pipeline, "validate_model", fake_validate_model)
+
+    stage1 = StageConfig(
+        patch_size=64,
+        batch_size=2,
+        epochs=1,
+        learning_rate=1e-5,
+        warmup_epochs=1,
+        fdpl_weight=0.08,
+        seed=43,
+    )
+    stage2 = StageConfig(
+        patch_size=256,
+        batch_size=2,
+        epochs=1,
+        learning_rate=5e-6,
+        warmup_epochs=1,
+        fdpl_weight=0.08 / 1.37,
+        log_scaling=1.37,
+        seed=43,
+    )
+    output_dir = tmp_path / "run"
+    pipeline.run_sidd_training(
+        path,
+        output_dir,
+        stage1,
+        stage2,
+        device="cpu",
+        smoke=4,
+        enable_fdpl=True,
+    )
+
+    assert [(size, stage.seed) for size, stage in map_calls] == [
+        (64, 43),
+        (256, 43),
+    ]
 
 
 def test_one_stage_cpu_optimization_writes_checkpoints(tmp_path: Path) -> None:

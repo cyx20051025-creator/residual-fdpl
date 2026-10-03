@@ -48,7 +48,7 @@ def compute_weight_map(
         raise ValueError("cannot build a weight map from an empty dataset")
     with torch.random.fork_rng():
         if shuffle:
-            torch.manual_seed(seed)
+            torch.random.default_generator.manual_seed(seed)
         generator = torch.Generator().manual_seed(seed)
         loader = DataLoader(
             dataset,
