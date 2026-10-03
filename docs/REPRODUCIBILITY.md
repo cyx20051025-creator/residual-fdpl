@@ -24,6 +24,10 @@ The canonical v3.1 carrier and training values are:
 
 The Stage 1 and Stage 2 maps are precomputed and fixed during training.
 Periodic calibration updates the loss scale, not the spatial-frequency map.
+Both map resolutions use the same fixed map-statistics seed, `42`, regardless
+of the model-training seed. The public trainer isolates the PyTorch RNG state
+while building or loading maps so that map preparation does not alter the
+subsequent training random stream.
 
 The sliding implementation follows the archived protocol: tile origins are
 `0, 96, 192, ...`; the final tile in each dimension is clipped to the image

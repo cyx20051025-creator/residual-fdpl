@@ -30,6 +30,34 @@ from cvfdpl.training.trainer import (
 from cvfdpl.training.weight_map import get_or_compute_weight_map
 from cvfdpl.utils import get_device, set_seed
 
+WEIGHT_MAP_SEED = 42
+
+
+def _get_weight_map_for_stage(
+    dataset,
+    image_size: int,
+    stage: StageConfig,
+    output_path: str | Path,
+    *,
+    num_workers: int,
+    force: bool,
+):
+    """Build or load a map from the shared seed-42 statistics."""
+
+    return get_or_compute_weight_map(
+        dataset,
+        image_size,
+        output_path,
+        num_pairs=stage.weight_map_pairs,
+        batch_size=stage.weight_map_batch_size,
+        seed=WEIGHT_MAP_SEED,
+        form=stage.weight_map_form,
+        use_power=stage.weight_map_power,
+        clip_quantile=stage.weight_map_clip_quantile,
+        num_workers=num_workers,
+        force=force,
+    )
+
 
 def _load_initial_model(
     checkpoint: str | Path | None,
@@ -247,29 +275,17 @@ def run_sidd_training(
                 map_dataset_256,
                 range(min(smoke, len(map_dataset_256))),
             )
-        map_64 = get_or_compute_weight_map(
+        map_64 = _get_weight_map_for_stage(
             map_dataset_64,
             stage1.patch_size,
             output_path,
-            num_pairs=stage1.weight_map_pairs,
-            batch_size=stage1.weight_map_batch_size,
-            seed=stage1.seed,
-            form=stage1.weight_map_form,
-            use_power=stage1.weight_map_power,
-            clip_quantile=stage1.weight_map_clip_quantile,
             num_workers=num_workers,
             force=force_maps,
         )
-        map_256 = get_or_compute_weight_map(
+        map_256 = _get_weight_map_for_stage(
             map_dataset_256,
             stage2.patch_size,
             output_path,
-            num_pairs=stage2.weight_map_pairs,
-            batch_size=stage2.weight_map_batch_size,
-            seed=stage2.seed,
-            form=stage2.weight_map_form,
-            use_power=stage2.weight_map_power,
-            clip_quantile=stage2.weight_map_clip_quantile,
             num_workers=num_workers,
             force=force_maps,
         )

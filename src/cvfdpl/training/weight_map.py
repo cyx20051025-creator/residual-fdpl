@@ -46,40 +46,45 @@ def compute_weight_map(
 
     if len(dataset) == 0:
         raise ValueError("cannot build a weight map from an empty dataset")
-    if shuffle:
-        torch.manual_seed(seed)
-    generator = torch.Generator().manual_seed(seed)
-    loader = DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=shuffle,
-        num_workers=num_workers,
-        generator=generator if shuffle else None,
-        persistent_workers=num_workers > 0,
-    )
-    map_device = torch.device(
-        device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
-    )
-
-    accumulated: torch.Tensor | None = None
-    count = 0
-    for noisy, clean in loader:
-        if count >= num_pairs:
-            break
-        noisy = noisy.to(map_device)
-        clean = clean.to(map_device)
-        noise = noisy - clean
-        amplitude = torch.abs(
-            torch.fft.fftshift(
-                torch.fft.fft2(noise, dim=(-2, -1)),
-                dim=(-2, -1),
-            )
+    with torch.random.fork_rng():
+        if shuffle:
+            torch.manual_seed(seed)
+        generator = torch.Generator().manual_seed(seed)
+        loader = DataLoader(
+            dataset,
+            batch_size=batch_size,
+            shuffle=shuffle,
+            num_workers=num_workers,
+            generator=generator if shuffle else None,
+            persistent_workers=num_workers > 0,
         )
-        if use_power:
-            amplitude = amplitude.square()
-        batch_sum = amplitude.sum(dim=0)
-        accumulated = batch_sum if accumulated is None else accumulated + batch_sum
-        count += amplitude.shape[0]
+        map_device = torch.device(
+            device
+            if device is not None
+            else ("cuda" if torch.cuda.is_available() else "cpu")
+        )
+
+        accumulated: torch.Tensor | None = None
+        count = 0
+        for noisy, clean in loader:
+            if count >= num_pairs:
+                break
+            noisy = noisy.to(map_device)
+            clean = clean.to(map_device)
+            noise = noisy - clean
+            amplitude = torch.abs(
+                torch.fft.fftshift(
+                    torch.fft.fft2(noise, dim=(-2, -1)),
+                    dim=(-2, -1),
+                )
+            )
+            if use_power:
+                amplitude = amplitude.square()
+            batch_sum = amplitude.sum(dim=0)
+            accumulated = (
+                batch_sum if accumulated is None else accumulated + batch_sum
+            )
+            count += amplitude.shape[0]
 
     if accumulated is None or count == 0:
         raise RuntimeError("the dataset produced no batches")

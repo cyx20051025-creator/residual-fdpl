@@ -15,7 +15,7 @@ The canonical carrier used in the paper is a compact 3-RCAB model:
 
 The canonical training and evaluation paths are present in a small, testable
 codebase without changing the locked experiment protocol. The corrected source
-revision prepared for review is tagged `v3.1-review-5`. Checkpoint and
+revision prepared for review is tagged `v3.1-review-6`. Checkpoint and
 evaluation-data assets remain attached to the `v3.1-review` GitHub Release
 rather than committed to ordinary Git history.
 
@@ -302,7 +302,7 @@ and citation are recorded in
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
 
-The source review tag `v3.1-review-5` contains the canonical source code,
+The source review tag `v3.1-review-6` contains the canonical source code,
 locked configurations, the Table 3 reproduction script, and the public
 checkpoint and evaluation-data manifests. Checkpoint binaries and the
 1,024-pair evaluation archive remain attached to the `v3.1-review` Release;
