@@ -4,29 +4,14 @@ This directory is reserved for the public download manifest. Checkpoint and
 SIDD+ evaluation downloads point to the `v3.1-review` GitHub Release.
 
 No dataset, checkpoint, HDF5 cache, or generated figure is committed to the
-public source repository. The six final checkpoints and the 1,024-pair
-evaluation archive are distributed in the review Release. Full datasets,
-derived training caches, and per-image results remain outside normal Git
-history.
+public source repository. The `v3.1-review` Release contains six final
+checkpoints, three checksum manifests, and `sidd_quick_eval_256.zip`. Full
+datasets, derived training caches, historical per-image JSON, and complete
+training histories remain outside normal Git history.
 
-The prepared private asset bundle contains:
-
-```text
-checkpoints/
-|-- rcab3_seed42_fdpl_final.pth
-|-- rcab3_seed42_nofdpl_final.pth
-|-- rcab3_seed43_fdpl_final.pth
-|-- rcab3_seed43_nofdpl_final.pth
-|-- rcab3_seed44_fdpl_final.pth
-`-- rcab3_seed44_nofdpl_final.pth
-
-results/raw/
-|-- selected paper, mechanism, and paired-significance JSON files
-`-- table-to-source mapping in results/paper/README.md
-
-release_bundles/
-`-- sidd_quick_eval_256.zip
-```
+The authoritative asset inventory is maintained in
+[`docs/MODEL_ZOO.md`](../docs/MODEL_ZOO.md), and the reproduction commands are
+in [`README.md`](../README.md).
 
 The quick-evaluation bundle contains 1,024 paired SIDD+ validation images and
 expands to approximately 190 MB. A public

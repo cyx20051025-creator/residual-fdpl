@@ -2,7 +2,7 @@
 
 ## Public Scope
 
-The first release is a clean implementation of the v3.1 canonical pipeline.
+This release contains a clean implementation of the main v3.1 pipeline.
 It does not include historical model generations, cloud queue scripts, local
 logs, datasets, checkpoints, or paper source.
 
@@ -50,14 +50,14 @@ Residual-FDPL/
 | `data/` | PNG pairs, HDF5 pairs, cropping, and normalization |
 | `training/` | Locked configurations, weight maps, EMA, calibration, loops, and checkpoints |
 | `metrics/` | PSNR and Gaussian-window SSIM |
-| `train.py` | User-facing canonical training entry point |
+| `train.py` | Public training entry point |
 | `scripts/evaluate.py` | Paired-image direct or sliding evaluation |
 | `scripts/reproduce_table3.sh` | Released-checkpoint Table 3 paired reproduction |
-| `results/` | Public placeholder; paper JSON stays in the private asset repo |
+| `results/` | Public placeholder; historical paper JSON is not included |
 
-## Migration Map
+## Source Mapping
 
-The public tree is a curated migration of the canonical research entry points:
+The public tree contains cleaned versions of these research entry points:
 
 | Research entry point | Public boundary |
 |---|---|
@@ -68,7 +68,7 @@ The public tree is a curated migration of the canonical research entry points:
 | `eval_v31_bilinear_paired.py` | `scripts/evaluate.py` |
 
 Historical dual-branch, NAFNet, RIDNet, SwinIR, cloud queue, and ablation
-scripts are outside the first public maintenance surface. They can be added
+scripts are outside the current public maintenance surface. They can be added
 later only after their licenses, provenance, and reproducible scope are
 reviewed.
 
@@ -85,8 +85,8 @@ does not store:
 - logs, cloud credentials, local output directories, or paper material
 
 Data and weights use separate terms. The six checkpoints and the SIDD+
-evaluation archive belong in Release assets or an external archive with
-SHA-256 manifests, not ordinary Git history.
+evaluation archive are distributed as `v3.1-review` Release assets with
+SHA-256 manifests, not in ordinary Git history.
 
 ## Protocol Invariants
 
@@ -98,7 +98,7 @@ SHA-256 manifests, not ordinary Git history.
 - Weight maps are generated from 15,000 paired SIDD noise samples and fixed
   during training.
 - Calibration changes only the loss scale, not the spatial-frequency map.
-- Stage 1 and Stage 2 are executed in one process for the canonical result.
+- Stage 1 and Stage 2 are executed in one process for the main reported result.
 - Configuration files are strict: unknown keys and protocol inconsistencies
   fail before training.
 - VGG19 weights can be supplied locally for offline runs.

@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the associated paper and this repository version."
-title: "Residual FDPL: Reference Implementation"
-abstract: "Reference implementation of Residual Frequency Domain Perception Loss for real-world image denoising."
+message: "If you use this software, please cite this repository version and the associated TVC manuscript. If you use Original FDPL or the earlier dual-branch study, also cite the CMC 2026 paper listed in README.md."
+title: "Residual FDPL: Reference Implementation for the TVC Study"
+abstract: "Reference implementation of Residual Frequency Domain Perception Loss for real-world image denoising. This software accompanies the TVC manuscript 'Residual Frequency Domain Perception Loss for Real-World Image Denoising with Adaptive Spectral Supervision'. The earlier Original FDPL method is described in the CMC 2026 paper 'A Lightweight Dual-Branch CNN with Frequency Domain Perception Loss for Image Denoising'."
 authors:
   - family-names: "Chen"
     given-names: "Yixuan"

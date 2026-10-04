@@ -1,6 +1,11 @@
-# Clean-Clone Audit
+# Historical Clean-Clone Audit (2026-10-01)
 
 Date: 2026-10-01
+
+This file records a historical source-only test audit. It is not the current
+full reproduction report and does not certify the six checkpoint evaluations.
+The current executable source is `v3.1-review-8`; the verification scope of the
+current release is summarized in `docs/REPRODUCIBILITY.md`.
 
 ## Source Revision
 
@@ -53,7 +58,6 @@ Reported PSNR delta:
 
 `+0.3954527690075338 dB`
 
-The reference result is private review evidence. The public repository
+The historical reference result is not distributed. The public repository
 contains the checkpoint mapping and reproduction script required to perform
 the same comparison.
-

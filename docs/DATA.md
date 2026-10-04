@@ -6,8 +6,8 @@ The Git source tree does not redistribute SIDD, Urban100, BSDS500, BSD68,
 CBSD68, derived HDF5 caches, or any other upstream dataset.
 
 The `v3.1-review` Release provides only the exact 1,024-pair SIDD+
-validation subset used for paper evaluation. Training data and other datasets
-must be obtained separately by the user.
+validation subset used for manuscript evaluation. Training data and other
+datasets must be obtained separately by the user.
 
 For the exact evaluation archive and its data notice, see
 [SIDD_QUICK_EVAL.md](SIDD_QUICK_EVAL.md) and

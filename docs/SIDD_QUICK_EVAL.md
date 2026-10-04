@@ -1,7 +1,8 @@
 # SIDD Quick-Evaluation Manifest
 
-The tables and figures in the v3.1 paper use the 1,024 paired SIDD+
-validation images described here. The exact evaluation archive
+The main validation comparisons and analyses that explicitly adopt this
+evaluation set in the v3.1 paper use the 1,024 paired SIDD+ validation images
+described here. The exact evaluation archive
 `sidd_quick_eval_256.zip`, `SIDD_QUICK_EVAL_SHA256SUMS`, and
 `SIDD_QUICK_EVAL_ZIP_SHA256SUMS` are attached to the `v3.1-review` GitHub
 Release under the upstream open-research/education notice. Git history stores

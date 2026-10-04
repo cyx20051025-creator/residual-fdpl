@@ -11,7 +11,7 @@ their own terms.
 | Component | Use | Upstream terms |
 |---|---|---|
 | PyTorch | Tensor operations, training, and inference | BSD-3-Clause |
-| torchvision | VGG19 model and pretrained weights | BSD-3-Clause |
+| torchvision | VGG19 implementation and model-loading utilities | BSD-3-Clause |
 | NumPy | Numerical and array support | BSD-3-Clause |
 | Pillow | PNG input and output | HPND |
 | h5py | HDF5 data access | BSD-3-Clause |
@@ -28,9 +28,12 @@ published ESRGAN and RCAN architectures. The repository does not redistribute
 the original upstream projects or their pretrained weights. Users should cite
 the corresponding papers when those components are used in derivative work.
 
-The VGG perceptual loss uses the torchvision VGG19 implementation and its
-available ImageNet-pretrained weights. VGG19 and the ImageNet dataset are not
-redistributed by this repository.
+The VGG perceptual loss uses the torchvision VGG19 implementation and the
+publicly available ImageNet-pretrained VGG19 weights. The torchvision software
+license does not by itself determine the terms of those external weights or of
+the ImageNet training data. Neither VGG19 weights nor the ImageNet dataset are
+redistributed by this repository. Users who download or redistribute those
+artifacts must verify the applicable upstream terms.
 
 ## SIDD and Evaluation Data
 
@@ -44,6 +47,6 @@ upstream challenge terms, and are not relicensed under Apache-2.0.
 ## External Baselines
 
 NAFNet, RIDNet, SwinIR, and other external baseline implementations are not
-part of the first public source-only release. If they are added later, their
+part of the current public source release. If they are added later, their
 source attribution, upstream license text, and pretrained-weight terms must be
 reviewed before redistribution.

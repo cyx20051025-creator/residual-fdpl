@@ -65,6 +65,17 @@ evaluation files used by the released checkpoints; any crop, color conversion,
 or resampling already present in the upstream data remains part of its
 provenance.
 
+### Provenance limitation
+
+The derived archive does not include a recorded upstream package identifier,
+track-specific file mapping, or a source-name manifest connecting each PNG to
+an original SIDD/SIDD+ file. Filenames were normalized for paired evaluation.
+The repository therefore does not claim that `0000.PNG` through `1023.PNG`
+correspond to the same original filenames upstream, and it does not provide
+source-file-level provenance for this derived copy. The archive should not be
+treated as a substitute for the upstream SIDD/SIDD+ distribution or as an
+archival copy of the complete dataset.
+
 ## Redistribution Conditions
 
 - Retain this notice and the upstream attribution with the archive.

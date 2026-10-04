@@ -1,9 +1,10 @@
 # Results
 
-The first public repository is source-only. Paper result JSON files are staged
-in the separate private asset repository together with checkpoints and the
-quick-evaluation bundle.
+This directory does not contain historical paper result JSON files. The six
+main Table 3 comparisons can be regenerated from the released checkpoints and
+the 1,024-pair evaluation bundle with
+[`scripts/reproduce_table3.sh`](../scripts/reproduce_table3.sh).
 
-This directory is retained only as a public placeholder so release notes can
-link to approved result assets later. Do not commit result JSON, checkpoints,
-datasets, HDF5 caches, histories, or logs here.
+This directory is retained as a placeholder for future approved result
+assets. Do not commit checkpoints, datasets, HDF5 caches, histories, logs, or
+historical paper JSON here.

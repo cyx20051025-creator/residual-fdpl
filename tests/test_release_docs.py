@@ -7,7 +7,7 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_review_release_docs_reference_canonical_review_tag() -> None:
+def test_public_docs_reference_current_source_and_asset_tags() -> None:
     source_documents = [
         REPOSITORY_ROOT / "README.md",
         REPOSITORY_ROOT / "docs" / "CODE_AVAILABILITY.md",
@@ -20,7 +20,7 @@ def test_review_release_docs_reference_canonical_review_tag() -> None:
     ]
 
     for document in source_documents:
-        assert "v3.1-review-7" in document.read_text(encoding="utf-8")
+        assert "v3.1-review-8" in document.read_text(encoding="utf-8")
 
     for document in release_documents:
         assert "v3.1-review" in document.read_text(encoding="utf-8")
@@ -28,13 +28,28 @@ def test_review_release_docs_reference_canonical_review_tag() -> None:
 
 def test_readme_quick_start_lists_all_release_manifests() -> None:
     readme = (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8")
-    quick_start = readme.split("## Reviewer Quick Start", 1)[1].split(
+    quick_start = readme.split("## Reproduction Quick Start", 1)[1].split(
         "This evaluates each released checkpoint", 1
     )[0]
 
     assert "all ten assets" in quick_start
+    assert "git clone --depth 1 --branch v3.1-review-8" in quick_start
+    assert "releases/tag/v3.1-review" in quick_start
     assert "shasum -a 256 -c CHECKPOINT_SHA256SUMS" in quick_start
     assert "shasum -a 256 -c SIDD_QUICK_EVAL_ZIP_SHA256SUMS" in quick_start
+
+
+def test_paper_artifact_map_uses_all_six_figure5_comparisons() -> None:
+    artifacts = (REPOSITORY_ROOT / "docs" / "PAPER_ARTIFACTS.md").read_text(
+        encoding="utf-8"
+    )
+
+    fig5_row = (
+        "| Fig. 5, main same-seed comparison | `scripts/reproduce_table3.sh` "
+        "| six paired gains"
+    )
+    assert fig5_row in artifacts
+    assert "can be reconstructed from the six rows" in artifacts
 
 
 def test_sidd_plus_notice_contains_required_terms_and_sources() -> None:

@@ -6,8 +6,8 @@ The public repository is available at:
 
 <https://github.com/cyx20051025-creator/residual-fdpl>
 
-The corrected source revision for the second review is tagged
-`v3.1-review-7`. It contains the canonical v3.1 pipeline, strict
+The current documentation and source revision is tagged `v3.1-review-8`. It
+contains the v3.1 pipeline, strict
 configurations, CPU tests, the Table 3 reproduction script, and public SHA-256
 manifests for checkpoints and the 1,024-pair evaluation set.
 
@@ -43,15 +43,22 @@ The optional SIDD+ evaluation archive is provided for open research and
 educational reproduction under the upstream notice in
 `docs/SIDD_PLUS_LICENSE_AND_NOTICE.md`. It is not included in ordinary Git
 history and is not relicensed under Apache-2.0. Per-image result JSON files
-remain in the private review reference.
+are not included. The public reproduction script regenerates the six main
+Table 3 summaries and their per-image evidence.
 
-## Future Archive Release
+## Asset Immutability
+
+The `v3.1-review` source snapshot and attached assets are retained as an
+immutable historical Release. Documentation corrections use a new source tag
+and do not replace assets in that Release.
+
+## Future Archival Release
 
 When bibliographic metadata and an archival identifier become available:
 
-1. Freeze the review source and paper artifact mapping.
+1. Freeze the v3.1 source and paper artifact mapping.
 2. Add the final paper DOI, journal metadata, and BibTeX information.
 3. Preserve the SIDD+ evaluation notice with any permanent release and decide
    whether the per-image JSON files should be added.
 4. Create a permanent `v3.1.0` release and archive DOI when applicable.
-5. Preserve the review tag and its assets for auditability.
+5. Preserve the `v3.1-review` tag and its assets for auditability.

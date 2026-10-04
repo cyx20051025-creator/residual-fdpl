@@ -2,7 +2,7 @@
 
 ## Locked Protocol
 
-The canonical v3.1 carrier and training values are:
+The main v3.1 carrier and training values are:
 
 | Component | Value |
 |---|---|
@@ -48,10 +48,45 @@ boundary and can be smaller than 128 pixels.
 - RIDNet and SwinIR-windowed are boundary evidence, not a cross-architecture
   ranking.
 
+## Original FDPL Convention
+
+`OriginalFDPLoss` follows the legacy convention used by the TVC experiments:
+
+- the amplitude spectra are computed with unshifted `torch.fft.fft2`
+- the fixed radial mask is indexed around the array center, not around the
+  zero-frequency bin
+- the two weighted amplitude errors use `torch.nn.functional.mse_loss`, which
+  averages over all elements
+
+The TVC manuscript explicitly distinguishes this grid convention from the
+shifted Fourier representation used by Residual FDPL. The public repository
+does not contain the original CMC implementation, so these notes document the
+behavior of this code and do not assert bitwise equivalence with the published
+CMC model.
+
+## Public Reproduction Scope
+
+| Scope | Status | Evidence |
+|---|---|---|
+| CPU tests and smoke path | fully reproducible from the public source tag | `tests/`, `scripts/smoke_test.py` |
+| Six Table 3 checkpoint comparisons | fully reproducible with the released checkpoints and evaluation bundle | `scripts/reproduce_table3.sh` |
+| Direct and sliding evaluation implementation | public | `src/cvfdpl/evaluation.py` |
+| Stage 0 and SIDD training implementation | public | `train.py`, `configs/`, `src/cvfdpl/training/` |
+| Original CMC Gaussian benchmark pipeline | not included | earlier CMC publication |
+| Historical training from scratch | not independently reproduced in this release | shared Stage-0 artifacts, exact training histories, and some experiment checkpoints are not public |
+| Historical per-image paper JSON | not distributed | users can regenerate the six main Table 3 comparisons from released assets |
+| Alternative-carrier experiments | partially represented in the manuscript, not fully packaged here | RIDNet, SwinIR-windowed, and related training paths are not release assets |
+
 ## Environment
 
-The clean-room validation baseline was Python 3.11.9 on macOS. The exact
-package versions from the independent source-only audit are recorded in
+Two validations have been run:
+
+| Validation | Scope | Environment |
+|---|---|---|
+| Source-only clean-room audit, 2026-09-25 | install, tests, and public source paths | Python 3.11.9, macOS, package versions in `requirements/validated.txt` |
+| Full checkpoint-evaluation reproduction, 2026-10-04 | clean clone, asset digest checks, 12 complete 1,024-pair evaluations, six paired Table 3 comparisons, and independent Student-t recomputation | Python 3.11.9, PyTorch 2.12.1, torchvision 0.27.1, NumPy 2.4.6, Pillow 12.3.0, h5py 3.16.0, SciPy 1.17.1, Apple M5 Pro with MPS |
+
+The exact package versions from the source-only audit are recorded in
 `requirements/validated.txt`:
 
 | Component | Validated version |
@@ -66,22 +101,23 @@ package versions from the independent source-only audit are recorded in
 | Ruff | 0.16.9 |
 | build | 1.6.1 |
 
-The minimum supported ranges remain in `pyproject.toml`. The earlier local
-training baseline used PyTorch 2.12.1 and Apple MPS. Linux CUDA support is part
-of the public target matrix but still requires a clean-room verification.
+The minimum supported ranges remain in `pyproject.toml`. Linux CUDA support is
+part of the public target matrix but has not been independently verified in
+the two audits above.
 
 The archived runs seeded Python, NumPy, PyTorch, and CUDA but did not enable
 cuDNN deterministic algorithms. The default public trainer matches that
 behavior. Use `--deterministic` only as a stricter repeatability option.
 
-## Migration Status
+## Maintenance Status
 
-- The clean source tree covers the canonical Stage 0, Stage 1/2, and
+- The clean source tree covers the main Stage 0, Stage 1/2, and
   direct/sliding evaluation paths.
 - Data-free evaluator coverage and sliding-grid regression tests are included
   in `tests/`.
-- Exact paper-result regression checks use private reference JSON. The six
+- Historical paper-result regression JSON is not included. The six
   checkpoints and the 1,024-pair SIDD+ evaluation archive are available from
   the `v3.1-review` Release under their separate terms.
-- The archived evaluation summary is checked against the private assets before
-  the `v3.1-review` release is replaced or extended.
+- The asset Release remains immutable. Documentation-only corrections are
+  published under a new source tag rather than by moving or replacing existing
+  tags and Release assets.

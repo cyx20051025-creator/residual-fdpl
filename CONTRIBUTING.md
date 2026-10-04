@@ -1,6 +1,6 @@
 # Contributing
 
-The public project focuses on the canonical Residual FDPL v3.1 pipeline.
+The public project focuses on the Residual FDPL v3.1 pipeline.
 Historical model generations are not part of the initial maintenance scope.
 
 ## Development
@@ -19,4 +19,3 @@ pytest
 - Add a focused test for every model, loss, metric, or data-loader change.
 - Do not weaken causal, seed, subset, or cross-architecture limitations in the
   documentation.
-
