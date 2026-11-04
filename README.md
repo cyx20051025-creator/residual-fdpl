@@ -6,7 +6,7 @@ denoising. This repository accompanies the manuscript:
 
 > Yixuan Chen and Yufeng Qin. *Residual Frequency Domain Perception Loss for
 > Real-World Image Denoising with Adaptive Spectral Supervision.* The Visual
-> Computer, 2026 (under review).
+> Computer, 2026 (accepted for publication).
 
 Original FDPL was introduced in our earlier work:
 
