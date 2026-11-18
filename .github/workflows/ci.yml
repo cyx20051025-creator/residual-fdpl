@@ -5,7 +5,7 @@ permissions:
 
 on:
   push:
-    branches: [main]
+    branches: [main, "rgb-correction-*"]
   pull_request:
 
 jobs:
@@ -38,6 +38,10 @@ jobs:
         run: python scripts/smoke_test.py
       - name: Table 3 CLI
         run: python scripts/reproduce_table3.py --help
+      - name: RGB Correction CLI
+        run: |
+          rgb-correction demo
+          python -m rgb_correction demo
       - name: Build
         run: python -m build
       - name: Verify Built Wheel
@@ -45,3 +49,4 @@ jobs:
           python -m pip install --no-deps --force-reinstall dist/*.whl
           cvfdpl-train --help
           cvfdpl-smoke
+          rgb-correction demo

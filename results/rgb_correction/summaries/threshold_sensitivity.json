@@ -1,0 +1,150 @@
+{
+  "diagnostic_only": true,
+  "endpoints": [
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed62_source56.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0215817263493172,
+      "mean_psnr_range_low": 1.0215817263493172,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 56
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed62_source57.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0215817263493172,
+      "mean_psnr_range_low": 1.0215817263493172,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 57
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed62_source58.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0215817263493172,
+      "mean_psnr_range_low": 1.0215817263493172,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 58
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed63_source56.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0404005110263825,
+      "mean_psnr_range_low": 1.0404005110263825,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 56
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed63_source57.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0404005110263825,
+      "mean_psnr_range_low": 1.0404005110263825,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 57
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed63_source58.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0404005110263825,
+      "mean_psnr_range_low": 1.0404005110263825,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 58
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed64_source56.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0103837586366213,
+      "mean_psnr_range_low": 1.0103837586366213,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 56
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed64_source57.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0103837586366213,
+      "mean_psnr_range_low": 1.0103837586366213,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 57
+    },
+    {
+      "architecture": "NAF_FINETUNED",
+      "configurations": 81,
+      "file": "risk_selector_sourcefree_seed64_source58.json",
+      "fraction_configurations_nonnegative_mean": 1.0,
+      "fraction_configurations_positive_mean": 1.0,
+      "fraction_configurations_positive_worst_split": 1.0,
+      "fraction_configurations_with_nonnegative_worst_split": 1.0,
+      "mean_psnr_range_high": 1.0103837586366213,
+      "mean_psnr_range_low": 1.0103837586366213,
+      "population_id": "sidd_cc_benchmark_29_scenes",
+      "source_seed": 58
+    }
+  ],
+  "grid": {
+    "max_severe_harm_rate": [
+      0.15,
+      0.2,
+      0.25
+    ],
+    "min_mean_gain_db": [
+      0.02,
+      0.05,
+      0.08
+    ],
+    "ridge_margin_db": [
+      0.03,
+      0.05,
+      0.08
+    ],
+    "uncapped_margin_db": [
+      0.08,
+      0.1,
+      0.12
+    ]
+  },
+  "primary_thresholds": {
+    "max_severe_harm_rate": 0.2,
+    "min_mean_gain_db": 0.05,
+    "ridge_margin_db": 0.05,
+    "uncapped_margin_db": 0.1
+  }
+}

@@ -1,4 +1,4 @@
-# Paper-to-Code and Result Mapping
+# TVC Paper-to-Code and Result Mapping
 
 This file maps the TVC manuscript artifacts to executable public code,
 implementation components, and reference evidence. "Exact regeneration" means
@@ -62,3 +62,15 @@ bash scripts/reproduce_table3.sh
   can be reconstructed from the six rows emitted by
   `scripts/reproduce_table3.sh`; the paper plotting script itself is not
   included in this source release.
+
+## Residual RGB-Correction Study
+
+The separate RGB-correction paper is mapped in
+[`docs/rgb_correction/PAPER_ARTIFACTS.md`](rgb_correction/PAPER_ARTIFACTS.md).
+That document links its endpoint-calibration, transfer-boundary,
+calibration-budget, selector, and pairing-control analyses to the maintained
+API and compact public result files.
+
+The maintained RGB implementation is under `src/rgb_correction/`; historical
+analysis code is under `scripts/rgb_correction/`; and aggregate numerical
+records are under `results/rgb_correction/summaries/`.

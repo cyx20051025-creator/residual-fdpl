@@ -47,6 +47,18 @@ upstream challenge terms, and are not relicensed under Apache-2.0.
 ## External Baselines
 
 NAFNet, RIDNet, SwinIR, and other external baseline implementations are not
-part of the current public source release. If they are added later, their
-source attribution, upstream license text, and pretrained-weight terms must be
-reviewed before redistribution.
+redistributed by the RGB-correction source release. The archived analysis code
+and compact summaries may refer to NAFNet, SwinIR, Restormer, and their
+checkpoints or outputs, but no third-party model parameters are committed. If
+such implementations or weights are added later, their source attribution,
+upstream license text, and pretrained-weight terms must be reviewed before
+redistribution.
+
+## RGB-Correction Research Data
+
+The RGB-correction study uses SIDD/SIDD+, PolyU, CC-noise, NIND, RENOIR, and
+DND and refers to frozen real-world denoisers and metric networks. No original
+image data, feature cache, checkpoint, or third-party model weight is committed
+to the RGB-correction source tree. All such artifacts remain subject to their
+providers' terms and are not relicensed under Apache-2.0 merely because an
+analysis script or aggregate score is public.
