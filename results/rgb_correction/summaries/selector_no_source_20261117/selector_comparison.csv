@@ -1,0 +1,4 @@
+seed,no_source_psnr,original_psnr,paired_difference,no_source_ssim,no_source_lpips,no_source_dists,positive_splits,negative_splits,fixed_target,no_source_actions,original_actions
+62,1.0215817263493172,1.017037812104592,0.004543914244725144,0.005502201172594841,-0.006335300289076538,-0.002589443798821706,10,0,0.25601549011010394,target_ridge_capped:4 / target_ridge_uncapped:6,target_ridge_capped:4 / target_ridge_uncapped:6
+63,1.0404005110263825,1.0324374001759749,0.00796311085040754,0.00551075366540597,-0.006416451757384213,-0.0026526338062607324,10,0,0.26736640563377967,target_ridge_capped:4 / target_ridge_uncapped:6,target_ridge_capped:4 / target_ridge_uncapped:6
+64,1.0103837586366213,0.9559610073383038,0.05442275129831749,0.005506102074510776,-0.0066242653305660214,-0.002632699820857782,10,0,0.22278840495989877,target_ridge_capped:4 / target_ridge_uncapped:6,target_ridge_capped:5 / target_ridge_uncapped:5

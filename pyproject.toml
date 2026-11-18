@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "residual-fdpl"
-version = "0.1.0"
-description = "Reference implementation of Residual Frequency Domain Perception Loss"
+version = "0.2.0"
+description = "Residual FDPL and risk-controlled residual RGB correction for real-world image denoising"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
@@ -18,6 +18,9 @@ keywords = [
   "image-denoising",
   "frequency-domain-loss",
   "real-world-image-denoising",
+  "residual-color-correction",
+  "risk-control",
+  "calibration",
   "SIDD",
 ]
 classifiers = [
@@ -58,6 +61,7 @@ dev = [
 cvfdpl-smoke = "cvfdpl.cli:smoke"
 cvfdpl-train = "cvfdpl.training.cli:main"
 cvfdpl-evaluate = "cvfdpl.evaluation:main"
+rgb-correction = "rgb_correction.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -72,6 +76,10 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+extend-exclude = [
+  "scripts/rgb_correction/legacy",
+  "scripts/rgb_correction/pipeline",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]

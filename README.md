@@ -1,8 +1,14 @@
-# Residual FDPL
+# Residual FDPL and Risk-Controlled RGB Correction
 
-Reference implementation for **Residual Frequency Domain Perception Loss
-(Residual FDPL)**, a frequency-domain training objective for real-world image
-denoising. This repository accompanies the manuscript:
+This repository hosts two connected public research components for real-world
+image denoising:
+
+1. **Residual Frequency Domain Perception Loss (Residual FDPL)**, a
+   frequency-domain training objective; and
+2. **risk-controlled residual RGB correction**, a post-denoising analysis and
+   calibration toolkit for a frozen denoiser.
+
+The Residual FDPL component accompanies the manuscript:
 
 > Yixuan Chen and Yufeng Qin. *Residual Frequency Domain Perception Loss for
 > Real-World Image Denoising with Adaptive Spectral Supervision.* The Visual
@@ -35,6 +41,17 @@ comparisons. It does not include the original CMC source tree, the CMC
 Gaussian benchmark pipeline, the historical dual-branch checkpoints, or a
 bitwise implementation-equivalence claim for the published CMC model.
 
+The RGB-correction component accompanies:
+
+> Yixuan Chen and Yufeng Qin. *Residual Color Correction after Real-World
+> Image Denoising: Transfer Boundaries and Risk-Controlled Endpoint
+> Calibration.* Manuscript submitted to Pattern Recognition, 2026.
+
+It studies a different question: after a real-world denoiser has been frozen,
+which residual channel-mean errors can be corrected, whether a correction rule
+transfers to another population or checkpoint, and how paired endpoint
+calibration can control correction risk.
+
 ## Status
 
 The public repository provides:
@@ -47,12 +64,46 @@ The public repository provides:
   `v3.1-review` Release
 - a script that evaluates all six Table 3 comparisons and writes per-image
   results plus JSON and CSV summaries
+- a maintained `rgb_correction` package for Rec.601 zero-luma projection,
+  pre-clipping MSE identities, scene-balanced Ridge calibration, scene-split
+  validation, and risk-controlled action selection
+- frozen RGB-correction protocols and compact machine-readable summaries for
+  the cross-endpoint, calibration-budget, and selector experiments
 
 Historical per-image JSON files, full training histories, and the original
 CMC experiments are not included. The released checkpoints and evaluation
 bundle allow users to regenerate the TVC per-image results. See
 [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for the public scope and
 verification boundaries.
+
+## Residual RGB Correction
+
+The maintained API is intentionally small and NumPy-only. It implements the
+operators and decision logic used by the paper; the historical replay scripts
+remain available under `scripts/rgb_correction/` for scholarly inspection.
+
+```bash
+python -m pip install -e .
+rgb-correction demo
+pytest tests/test_rgb_correction_*.py
+```
+
+The demo prints the zero-luma projection, the exact pre-clipping MSE reduction,
+and the corresponding PSNR change. The `select` subcommand applies the frozen
+risk policy to held-out candidate scores supplied as JSON:
+
+```bash
+rgb-correction select --input candidates.json
+```
+
+The public package does **not** redistribute the source images, evaluation
+images, feature caches, denoiser checkpoints, or fitted third-party model
+weights. Consequently, the historical scripts are not a turnkey end-to-end
+pipeline. The compact summaries in `results/rgb_correction/` document the
+reported analyses, while
+[`docs/rgb_correction/REPRODUCIBILITY.md`](docs/rgb_correction/REPRODUCIBILITY.md)
+states exactly which components can be checked from public files and which
+require user-supplied artifacts.
 
 ## Installation
 
@@ -273,8 +324,10 @@ That variant is a clean-chain option, not the archived main result protocol.
 |-- evaluate.py             # Direct and sliding checkpoint evaluation
 |-- configs/                # Locked protocol values
 |-- docs/                   # Data, model, release, and reproducibility notes
+|-- protocols/rgb_correction/ # Frozen RGB-correction analysis protocols
 |-- requirements.txt        # Thin compatibility entry point for dependencies
-|-- scripts/                # One-click training/evaluation and data tools
+|-- results/rgb_correction/ # Compact public RGB-correction result summaries
+|-- scripts/                # Training/evaluation and historical replay tools
 |-- src/cvfdpl/
 |   |-- data/               # SIDD and HDF5 datasets
 |   |-- losses/             # Original FDPL and Residual FDPL
@@ -282,8 +335,9 @@ That variant is a clean-chain option, not the archived main result protocol.
 |   |-- models/             # 3-RCAB carrier
 |   |-- training/           # Trainers, EMA, weight maps, and configuration
 |   `-- utils/              # Device and reproducibility helpers
+|-- src/rgb_correction/     # Maintained RGB-correction operators and selection API
 |-- tests/                  # CPU-only unit and smoke tests
-`-- results/                # Public placeholder; historical JSON is not distributed
+`-- results/                # Compact summaries; raw datasets and assets stay outside Git
 ```
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for ownership boundaries and
@@ -306,9 +360,9 @@ scope and protocol constants.
 ## Citation
 
 Repository metadata is provided in [CITATION.cff](CITATION.cff). It identifies
-the software separately from the TVC manuscript and the earlier CMC paper. Add
-the final TVC DOI once it is assigned; do not reuse the CMC DOI for the TVC
-study.
+the software separately from the TVC manuscript, the RGB-correction manuscript,
+and the earlier CMC paper. Add final journal DOIs once assigned; do not reuse
+the CMC DOI for either later study.
 
 ## License
 
@@ -325,6 +379,10 @@ It is not Apache-2.0. Its source, upstream notice, redistribution conditions,
 and citation are recorded in
 [docs/SIDD_PLUS_LICENSE_AND_NOTICE.md](docs/SIDD_PLUS_LICENSE_AND_NOTICE.md).
 
+The RGB-correction release does not redistribute SIDD/SIDD+, PolyU, CC-noise,
+NIND, RENOIR, DND, or third-party denoiser weights. Those inputs remain subject
+to their providers' terms.
+
 ## Documentation and Availability
 
 - [Code availability statement](docs/CODE_AVAILABILITY.md)
@@ -334,6 +392,9 @@ and citation are recorded in
 - [SIDD+ data license and notice](docs/SIDD_PLUS_LICENSE_AND_NOTICE.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 - [Release plan](docs/RELEASE_PLAN.md)
+- [RGB-correction code and evidence guide](docs/rgb_correction/README.md)
+- [RGB-correction reproducibility scope](docs/rgb_correction/REPRODUCIBILITY.md)
+- [RGB-correction paper-to-code map](docs/rgb_correction/PAPER_ARTIFACTS.md)
 
 The source tag `v3.1-review-8` contains the source code, configurations, the
 six-row Table 3 reproduction script, and the public checkpoint and

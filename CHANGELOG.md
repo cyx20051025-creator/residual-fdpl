@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+- Added the risk-controlled residual RGB-correction component accompanying
+  *Residual Color Correction after Real-World Image Denoising: Transfer
+  Boundaries and Risk-Controlled Endpoint Calibration*.
+- Added a maintained `rgb_correction` NumPy package for zero-luma projection,
+  exact pre-clipping MSE identities, scene-balanced Ridge calibration,
+  scene-split validation, and candidate action selection.
+- Added frozen RGB-correction protocols, compact aggregate result summaries,
+  historical replay scripts, paper-to-code mappings, and explicit asset and
+  third-party boundaries.
+- Added focused CPU tests, the `rgb-correction` console entry point, feature
+  branch CI coverage, and package-manifest coverage for the new research files.
+
 ## v3.1-review-8
 
 - Clarified that executable source comes from tag `v3.1-review-8` while

@@ -121,3 +121,35 @@ behavior. Use `--deterministic` only as a stricter repeatability option.
 - The asset Release remains immutable. Documentation-only corrections are
   published under a new source tag rather than by moving or replacing existing
   tags and Release assets.
+
+## Residual RGB-Correction Component
+
+The RGB-correction component has a separate protocol and verification scope:
+
+| Scope | Status | Evidence |
+|---|---|---|
+| Zero-luma geometry and pre-clipping MSE identity | fully reproducible from public source | `src/rgb_correction/ops.py`, `tests/test_rgb_correction_ops.py` |
+| Scene-balanced Ridge fitting and bootstrap interval | fully reproducible from public source | `src/rgb_correction/calibration.py`, `tests/test_rgb_correction_calibration.py` |
+| Calibration/evaluation split validation | fully reproducible from public source | `src/rgb_correction/validation.py`, focused tests |
+| Risk-policy selection and abstention | fully reproducible from public source | `src/rgb_correction/selection.py`, `rgb-correction select`, focused tests |
+| Compact cross-endpoint and selector results | public aggregate records | `results/rgb_correction/summaries/` and frozen protocols |
+| Per-image fitting, rendering, and metric replay | scripts public; upstream images/checkpoints/features not redistributed | `scripts/rgb_correction/`, `protocols/rgb_correction/` |
+
+```bash
+python -m pip install -e ".[dev]"
+pytest tests/test_rgb_correction_*.py
+rgb-correction demo
+```
+
+The RGB module's own imports require only NumPy, and this component does not
+retrain a denoiser. The full repository installation still includes the
+project-level dependencies needed by the TVC pipeline. The compact summaries
+retain the paper's unit-level constraints: pre-clipping scores are not
+post-clipping PSNR, repeated splits are not independent populations, and
+cross-checkpoint applications over one dataset are not independent datasets.
+
+The repository does not distribute source or evaluation images, SIDD/SIDD+,
+PolyU, CC-noise, NIND, RENOIR, DND, denoiser checkpoints, feature caches, or
+third-party metric weights. See
+[`docs/rgb_correction/REPRODUCIBILITY.md`](rgb_correction/REPRODUCIBILITY.md)
+for the four public verification levels and replay boundary.
