@@ -6,6 +6,8 @@ authors:
   - family-names: "Chen"
     given-names: "Yixuan"
     email: "cyx20051025@gmail.com"
+  - family-names: "Shi"
+    given-names: "Chengkai"
   - family-names: "Qin"
     given-names: "Yufeng"
 version: "0.2.0"
