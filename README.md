@@ -69,6 +69,8 @@ The public repository provides:
   validation, and risk-controlled action selection
 - frozen RGB-correction protocols and compact machine-readable summaries for
   the cross-endpoint, calibration-budget, and selector experiments
+- the three fitted source-rule artifacts used by the reported analyses, with a
+  versioned SHA-256 manifest, in `results/rgb_correction/source_rules/`
 
 Historical per-image JSON files, full training histories, and the original
 CMC experiments are not included. The released checkpoints and evaluation

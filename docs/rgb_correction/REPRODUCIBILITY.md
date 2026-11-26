@@ -6,13 +6,22 @@
 |---|---|---|
 | A: maintained code | Import, operators, Ridge fit, split validation, selection policy, CLI, source build | This Git repository |
 | B: aggregate replay | Re-read compact CSV/Markdown summaries and inspect frozen split/policy decisions | This Git repository |
-| C: historical analysis replay | Re-run fitting, scoring, bootstrap, and plotting scripts | Upstream images/features, frozen denoisers, and fitted regressors obtained under their own terms |
+| C: historical analysis replay | Re-run scoring, bootstrap, and plotting scripts using the published source-rule models | Upstream images/features and frozen denoisers obtained under their own terms; fitted source-rule artifacts are in `results/rgb_correction/source_rules/` |
 | D: end-to-end image rendering | Regenerate PSNR, SSIM, LPIPS, and DISTS from denoised outputs | All upstream images, checkpoints, model weights, and metric dependencies |
 
 This release fully supports Level A. It supports Level B for the compact files
 under `results/rgb_correction/`. Levels C and D are auditable from the archived
 scripts and protocols, but are not a one-command public replay because the
 required images, checkpoints, and feature caches are not redistributed.
+
+The three fitted source-rule models are distributed as versioned pickle
+artifacts under `results/rgb_correction/source_rules/`. Each file is a checked
+dictionary containing the 117-feature schema, five fitted ensemble members,
+the selected scale and aggregation rule, and the source-selection record.
+Their SHA-256 digests are provided alongside the artifacts. Loading these
+files requires scikit-learn; the maintained NumPy-only API does not depend on
+them. Source images, target features, denoiser checkpoints, metric weights,
+and third-party model parameters remain excluded.
 
 ## Locked Geometry
 
@@ -89,6 +98,10 @@ The repository deliberately excludes:
 - feature caches and per-image tensors;
 - cloud launch scripts and credentials; and
 - large intermediate result trees.
+
+The fitted first-party source-rule models are an explicit exception: their
+three compact artifacts and checksum manifest are included because they are
+needed to audit the transfer and selector experiments.
 
 ## Reporting Rules
 

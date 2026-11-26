@@ -71,6 +71,8 @@ for PSNR and SSIM; negative is better for LPIPS and DISTS.
 - `scripts/rgb_correction/pipeline/`: the archived RGB-offset pilot pipeline.
 - `results/rgb_correction/summaries/`: compact Markdown and CSV summaries plus
   selected split and sensitivity JSON files.
+- `results/rgb_correction/source_rules/`: the three fitted source-rule models,
+  their SHA-256 manifest, and loading notes.
 - `assets/rgb_correction/`: instructions for future release assets; no raw
   image, checkpoint, feature cache, or fitted third-party model is committed.
 
