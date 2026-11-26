@@ -10,11 +10,13 @@ correction study:
 The summaries cover cross-endpoint calibration, calibration-budget sweeps,
 source-free selector replay, source-rule replication, threshold sensitivity,
 target-pairing shuffle controls, and NIND/SIDD-CC/SIDD+ boundary checks.
+The fitted source-rule models used for those analyses are in
+`source_rules/`, together with their checksums and loading notes.
 
 These are **not** complete per-image result trees. Raw images, feature caches,
-denoiser checkpoints, fitted third-party weights, and large intermediate JSON
-files remain outside Git. Numerical values must be interpreted with the
-matching protocol in `protocols/rgb_correction/` and the mapping in
+denoiser checkpoints, third-party weights, and large intermediate JSON files
+remain outside Git. Numerical values must be interpreted with the matching
+protocol in `protocols/rgb_correction/` and the mapping in
 `docs/rgb_correction/PAPER_ARTIFACTS.md`.
 
 In particular:
