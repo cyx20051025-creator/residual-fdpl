@@ -43,9 +43,9 @@ bitwise implementation-equivalence claim for the published CMC model.
 
 The RGB-correction component accompanies:
 
-> Yixuan Chen and Yufeng Qin. *Residual Color Correction after Real-World
+> Yixuan Chen, Chengkai Shi and Yufeng Qin. *Residual Color Correction after Real-World
 > Image Denoising: Transfer Boundaries and Risk-Controlled Endpoint
-> Calibration.* Manuscript submitted to Pattern Recognition, 2026.
+> Calibration.* Manuscript prepared for submission to Image and Vision Computing, 2026.
 
 It studies a different question: after a real-world denoiser has been frozen,
 which residual channel-mean errors can be corrected, whether a correction rule
